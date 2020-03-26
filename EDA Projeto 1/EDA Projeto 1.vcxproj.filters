@@ -27,6 +27,9 @@
     <ClCompile Include="products.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="files.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h">
