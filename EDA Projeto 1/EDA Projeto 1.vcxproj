@@ -138,6 +138,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="products.cpp" />
+    <ClCompile Include="slots.cpp" />
+    <ClCompile Include="vending_machine.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

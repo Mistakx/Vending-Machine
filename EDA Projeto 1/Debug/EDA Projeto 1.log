@@ -1,0 +1,8 @@
+﻿  main.cpp
+D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\main.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  slots.cpp
+  vending_machine.cpp
+  Generating Code...
+  LINK : D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe not found or not built by the last incremental link; performing full link
+vending_machine.obj : error LNK2005: "struct slot * __cdecl vending_machine_initialization(void)" (?vending_machine_initialization@@YAPAUslot@@XZ) already defined in slots.obj
+D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe : fatal error LNK1169: one or more multiply defined symbols found
