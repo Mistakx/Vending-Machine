@@ -1,3 +1,79 @@
 ﻿  files.cpp
-D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\files.cpp(100): warning C4715: 'file_to_array': not all control paths return a value
-  EDA Projeto 1.vcxproj -> D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,17): error C2146: syntax error: missing ';' before identifier 'text_products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,15): error C2146: syntax error: missing ';' before identifier 'text_prices'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,10): error C2146: syntax error: missing ';' before identifier 'products_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,8): error C2146: syntax error: missing ';' before identifier 'prices_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(55,24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(55,1): error C2086: 'int prices': redefinition
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46): message : see declaration of 'prices'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(55,8): error C2146: syntax error: missing ';' before identifier 'prices_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(55,43): error C2143: syntax error: missing ';' before '{'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(55,43): error C2447: '{': missing function header (old-style formal list?)
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(102,28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(102,1): error C2086: 'int products': redefinition
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45): message : see declaration of 'products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(102,10): error C2146: syntax error: missing ';' before identifier 'products_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(102,47): error C2143: syntax error: missing ';' before '{'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\files.cpp(102,47): error C2447: '{': missing function header (old-style formal list?)
+  globals.cpp
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,17): error C2146: syntax error: missing ';' before identifier 'text_products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,15): error C2146: syntax error: missing ';' before identifier 'text_prices'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,10): error C2146: syntax error: missing ';' before identifier 'products_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,8): error C2146: syntax error: missing ';' before identifier 'prices_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\globals.cpp(8,24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\globals.cpp(8,1): error C2086: 'int products': redefinition
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45): message : see declaration of 'products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\globals.cpp(8,10): error C2146: syntax error: missing ';' before identifier 'text_products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\globals.cpp(9,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\globals.cpp(9,1): error C2086: 'int prices': redefinition
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46): message : see declaration of 'prices'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\globals.cpp(9,8): error C2146: syntax error: missing ';' before identifier 'text_prices'
+  main.cpp
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,17): error C2146: syntax error: missing ';' before identifier 'text_products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,15): error C2146: syntax error: missing ';' before identifier 'text_prices'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,10): error C2146: syntax error: missing ';' before identifier 'products_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,8): error C2146: syntax error: missing ';' before identifier 'prices_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\main.cpp(12,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\main.cpp(22,11): error C2146: syntax error: missing ';' before identifier 'initialization_products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\main.cpp(22,11): error C2065: 'initialization_products': undeclared identifier
+  products.cpp
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,17): error C2146: syntax error: missing ';' before identifier 'text_products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,15): error C2146: syntax error: missing ';' before identifier 'text_prices'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,10): error C2146: syntax error: missing ';' before identifier 'products_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,8): error C2146: syntax error: missing ';' before identifier 'prices_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\products.cpp(11,1): error C2059: syntax error: '}'
+  slots.cpp
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,17): error C2146: syntax error: missing ';' before identifier 'text_products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,15): error C2146: syntax error: missing ';' before identifier 'text_prices'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,10): error C2146: syntax error: missing ';' before identifier 'products_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,8): error C2146: syntax error: missing ';' before identifier 'prices_to_struct'
+  vending_machine.cpp
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(8,17): error C2146: syntax error: missing ';' before identifier 'text_products'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(9,15): error C2146: syntax error: missing ';' before identifier 'text_prices'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(45,10): error C2146: syntax error: missing ';' before identifier 'products_to_struct'
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\header.h(46,8): error C2146: syntax error: missing ';' before identifier 'prices_to_struct'
+  Generating Code...

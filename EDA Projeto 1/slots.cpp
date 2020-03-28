@@ -7,12 +7,11 @@ using namespace std;
 
 void slot_initialization(slot slot_to_initialize, int slot_position) {
 
-	int slot_capacity = rand() % 6 + 5; // Generates a random number between 5 and 10 (including both)
 
-	slot_to_initialize.slot_letter = slot_letter(slot_position);
-	slot_to_initialize.slot_capacity = slot_capacity;
+	slot_to_initialize.slot_letter = slot_letter(slot_position); // Initializes the slot with it's corresponding letter.
+	slot_to_initialize.slot_capacity = rand() % 6 + 5; // Initializes the slot with a random capacity (between 5 and 10 (including both))
+	slot_to_initialize.current_number_of_products = slot_to_initialize.slot_capacity; // The slot starts full of products.
 	
-
 }
 
 char slot_letter(int slot_position) { // I already know the next 10 minutes are going to be boring doing this function.

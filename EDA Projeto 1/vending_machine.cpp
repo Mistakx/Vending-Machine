@@ -6,7 +6,6 @@ slot* vending_machine_initialization() {
 
 	int number_of_slots = rand() % 4 + 9; // Generates a random number between 9 and 12 (including both)
 
-
 	slot* pvending_machine = new slot[number_of_slots]; // The vending machine is an array of slots.
 	
 	for (int i = 0; i < number_of_slots; i++) {

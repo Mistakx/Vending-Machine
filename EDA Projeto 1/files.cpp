@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "header.h"
 using namespace std;
 
 /*
@@ -23,12 +24,12 @@ File reading implementations:
 Since we chose the second implementation, now the program needs to save the file to an array. Once again we have two options.
 
     First way:
-     - Get the number of lines.
+     - Get the number of lines of the text file that is going to be saved to an array.
      - Create an array with that many elements.
      - Save the elements to that array.
 
      Advantages: Better memory usage since the array's size is the same as the number of elements.
-     Disadvantages: Worse processor usage since it first gets the number of lines, then does the same to add the lines to the array.
+     Disadvantages: Worse processor usage since the program first gets the number of lines, then does the same to add the lines to the array.
 
 
      Second way:
@@ -44,37 +45,36 @@ Since we chose the second implementation, now the program needs to save the file
      - Since the file is only read at the program's startup, we feel it's better to take longer for the program to boot up than it is to have wasted memory
        for as long as the program is running.
 
-    Correct Implementation: Using linked lists (which the teacher said we couldn't do) neither of these problems would ocurr. Every line could be saved to a node as it was
-                            read and it would be faster than the first way, and have none of the memory problems of the second way.
+    Correct Implementation: Using linked lists (which the teacher said we couldn't do) neither of these problems would ocurr. 
+                            Every line could be immediately saved to a new node as it was read and it would be faster than
+                            the first way, and have none of the memory problems of the second way.
                             
 
 */
 
-string* file_to_array(string file_path) {  // Reads a file and returns an array with each line as an element of that array.
+prices prices_to_struct(string file_path) { // Reads the prices file and returns an array with each line as an element of that array.
     // Ifstream - Read from files. Ofstream - Write to files.
 
-
-	ifstream file(file_path);
-    string line = "";
-    int number_of_lines = 0;
+    ifstream file(file_path);
     
-    // Open the file to get the number of lines
     if (file.is_open()) {
 
+        string line = "";
+        prices prices; // Usually it's not good practice to give both the same name, but this struct was only created
+        // to be used once, and only here, so future confusion will not ocurr.
 
         while (getline(file, line)) {
-            number_of_lines++;
+            prices.lenght++; // Number of lines of the prices array.
 
         } // When getline reaches the end of the file it sets an eof flag (End-of-file) on the stream.
 
-        // string* result[number_of_lines]; // number_of_lines not known at compile time.
-        string* result = new string[number_of_lines]; // Array of strings. It has to be dynamically alocated because the array size isn't known at compile time.
+        prices.array = new float[prices.lenght]; // Array of ints. It has to be dynamically alocated because the array size isn't known at compile time.
 
         file.clear(); /* This clears the eof flag. While checking the documentation we found that C++ behaviour regarding this line and the next has changed.
-         C++98 - If the eofbit flag is set before the seekg call, the function fails.
-         C++11 - The seekg function clears the eofbit flag, if set before the call.
-         Source - http://www.cplusplus.com/reference/istream/istream/seekg/
-         Conclusion: This line isn't needed in the newer versions of C++.
+            C++98 - If the eofbit flag is set before the seekg call, the function fails.
+            C++11 - The seekg function clears the eofbit flag, if set before the call.
+            Source - http://www.cplusplus.com/reference/istream/istream/seekg/
+            Conclusion: This line isn't needed in the newer versions of C++.
         */
         file.seekg(0, ios::beg); // Sets the position of the next character to be extracted from the input stream back at the beginning so we can getline again.
 
@@ -83,12 +83,12 @@ string* file_to_array(string file_path) {  // Reads a file and returns an array 
             // First reason: It is used so "i" is declared inside the scope of the while loop. This is to avoid "i = 0;" before the while loop. 
             //               It's good practice to keep variables inside the scope in which they're used.
             // Second reason: If we just put "i" inside of the while loop it resets back to 0 every time the loop is run, which obviously isn't the intended behaviour.
-            result[i] = line;
+            prices.array[i] = stof(line); // Converts line to int before adding to array.
             i++;
         }
 
         file.close();
-        return result;
+        return prices;
 
     } else cout << file_path << "is being used by another process." << endl; 
 
@@ -99,6 +99,55 @@ string* file_to_array(string file_path) {  // Reads a file and returns an array 
 
 }
 
+products products_to_struct(string file_path) { // Reads the products file and returns an array with each line as an element of that array.
+    // Ifstream - Read from files. Ofstream - Write to files.
 
+    ifstream file(file_path);
+
+
+    if (file.is_open()) {
+
+        string line = "";
+        products products;
+            
+        while (getline(file, line)) {
+            products.lenght++; // Number of lines of the products array.
+        } // When getline reaches the end of the file it sets an eof flag (End-of-file) on the stream.
+
+        products.array = new string[products.lenght]; // Array of strings. It has to be dynamically alocated because the array size isn't known at compile time.
+
+        file.clear(); /* This clears the eof flag. While checking the documentation we found that C++ behaviour regarding this line and the next has changed.
+            C++98 - If the eofbit flag is set before the seekg call, the function fails.
+            C++11 - The seekg function clears the eofbit flag, if set before the call.
+            Source - http://www.cplusplus.com/reference/istream/istream/seekg/
+            Conclusion: This line isn't needed in the newer versions of C++.
+        */
+        file.seekg(0, ios::beg); // Sets the position of the next character to be extracted from the input stream back at the beginning so we can getline again.
+
+        while (getline(file, line)) {
+            static int i = 0; // The static keyword is used for two reasons:
+            // First reason: It is used so "i" is declared inside the scope of the while loop. This is to avoid "i = 0;" before the while loop. 
+            //               It's good practice to keep variables inside the scope in which they're used.
+            // Second reason: If we just put "i" inside of the while loop it resets back to 0 every time the loop is run, which obviously isn't the intended behaviour.
+            products.array[i] = line;
+            i++;
+        }
+        file.close();
+        return products;
+        
+
+
+
+
+
+    }
+    else cout << file_path << "is being used by another process." << endl;
+
+
+
+
+
+
+}
 
 
