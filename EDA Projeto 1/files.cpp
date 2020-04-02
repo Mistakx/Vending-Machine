@@ -108,7 +108,8 @@ products products_to_struct(string file_path) { // Reads the products file and r
     if (file.is_open()) {
 
         string line = "";
-        products products;
+        products products; // Usually it's not good practice to give both the same name, but this struct was only created
+        // to be used once, and only here, so future confusion will not ocurr.
             
         while (getline(file, line)) {
             products.lenght++; // Number of lines of the products array.
