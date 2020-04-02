@@ -3,29 +3,14 @@
 #include "header.h"
 using namespace std;
 
-void print_slot(slot slot_to_print) {
-
-	cout << "Slot Letter: " << slot_to_print.letter << endl;
-	cout << "Slot Capacity: " << slot_to_print.capacity << endl;
-	cout << "Current Number of Products: " << slot_to_print.current_number_of_products << endl;
-	cout << "Product Name: " << slot_to_print.product_name << endl;
-	cout << "Slot Price: " << slot_to_print.price << endl;
-	cout << endl;
 
 
-
-}
-
-void slot_initialization(slot slot_to_initialize, int slot_position, products* initialization_products, prices* text_prices) {
+void slot_initialization(slot slot_to_initialize, int slot_position) {
 
 
-	slot_to_initialize.letter = slot_letter(slot_position); // Initializes the slot with it's corresponding letter.
-	slot_to_initialize.capacity = rand() % 6 + 5; // Initializes the slot with a random capacity (between 5 and 10 (including both))
-	slot_to_initialize.current_number_of_products = slot_to_initialize.capacity; // The slot starts full of products.
-	slot_to_initialize.product_name = choose_random_product(initialization_products); // Choose a random product to place on the slot from the remaining products.
-	slot_to_initialize.price = text_prices->array[rand() % text_prices->lenght]; // The slot starts with a random price chosen from the prices.txt file.
-	
-	print_slot(slot_to_initialize);
+	slot_to_initialize.slot_letter = slot_letter(slot_position); // Initializes the slot with it's corresponding letter.
+	slot_to_initialize.slot_capacity = rand() % 6 + 5; // Initializes the slot with a random capacity (between 5 and 10 (including both))
+	slot_to_initialize.current_number_of_products = slot_to_initialize.slot_capacity; // The slot starts full of products.
 	
 }
 
