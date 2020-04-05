@@ -52,7 +52,7 @@ Since we chose the second implementation, now the program needs to save the file
 
 */
 
-Prices prices_to_struct(string* file_path) { // Reads the prices file and returns an array with each line as an element of that array.
+Prices* prices_to_struct(string* file_path) { // Reads the prices file and returns an array with each line as an element of that array.
     // Ifstream - Read from files. Ofstream - Write to files.
 
     ifstream file(*file_path);
@@ -84,7 +84,7 @@ Prices prices_to_struct(string* file_path) { // Reads the prices file and return
         }
 
         file.close();
-        return prices;
+        return &prices;
 
     } else cout << file_path << "is being used by another process." << endl; 
 
@@ -95,7 +95,7 @@ Prices prices_to_struct(string* file_path) { // Reads the prices file and return
 
 }
 
-Products products_to_struct(string* file_path) { // Reads the products file and returns an array with each line as an element of that array.
+Products* products_to_struct(string* file_path) { // Reads the products file and returns an array with each line as an element of that array.
     // Ifstream - Read from files. Ofstream - Write to files.
 
     ifstream file(*file_path);
@@ -126,7 +126,7 @@ Products products_to_struct(string* file_path) { // Reads the products file and 
             i++;
         }
         file.close();
-        return products;
+        return &products;
         
 
 

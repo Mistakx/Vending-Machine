@@ -45,12 +45,14 @@ Products* delete_product(Products* struct_to_delete_from, int* index_to_delete) 
 
 }
 
+// TODO: See if this function can return a pointer instead of a copy of the chosen_product_name.
 string choose_random_product(Products* products_to_choose_from) { // Chooses random product from a struct, then removes that product from the struct.
 
 	int random_product_index = rand() % products_to_choose_from->lenght; // Generates a random number between 0 and the number of products still available (including both).
 	string chosen_product_name = products_to_choose_from->array[random_product_index]; // Chooses a product from the initialization_products array.
 	
 	*products_to_choose_from = *delete_product(products_to_choose_from, &random_product_index);
+
 
 	return chosen_product_name;	
 	

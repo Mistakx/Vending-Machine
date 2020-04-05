@@ -1,15 +1,14 @@
 #include <iostream>
-#include <fstream>
 #include "header.h"
 using namespace std;
 
-void print_slot(Slot slot_to_print) {
+void print_slot(Slot* slot_to_print) { // !Debug Function
 
-	cout << "Slot Letter: " << slot_to_print.letter << endl;
-	cout << "Slot Capacity: " << slot_to_print.capacity << endl;
-	cout << "Current Number of Products: " << slot_to_print.current_number_of_products << endl;
-	cout << "Product Name: " << slot_to_print.product_name << endl;
-	cout << "Slot Price: " << slot_to_print.price << endl;
+	cout << "Slot Letter: " << slot_to_print->letter << endl;
+	cout << "Slot Capacity: " << slot_to_print->capacity << endl;
+	cout << "Current Number of Products: " << slot_to_print->current_number_of_products << endl;
+	cout << "Product Name: " << slot_to_print->product_name << endl;
+	cout << "Slot Price: " << slot_to_print->price << endl;
 	cout << endl;
 
 }
@@ -22,7 +21,7 @@ void slot_initialization(Slot* slot_to_initialize, int slot_position, Products* 
 	slot_to_initialize->product_name = choose_random_product(initialization_products); // Choose a random product to place on the slot from the remaining products.
 	slot_to_initialize->price = text_prices->array[rand() % text_prices->lenght]; // The slot starts with a random price chosen from the prices.txt file.
 	
-	//print_slot(slot_to_initialize); // Debug
+	//print_slot(slot_to_initialize); // !Debug: Prints each slot after it's initialization.
 	
 }
 

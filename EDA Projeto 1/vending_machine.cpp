@@ -4,14 +4,23 @@
 #include "header.h"
 using namespace std;
 
+void print_vending_machine(Vending_machine* vending_machine) {
+
+	for (int i = 0; i < vending_machine->size; i++) {
+
+		print_slot(&(vending_machine->slots[i]));
+
+	}
+
+}
 
 void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices* text_prices) {
 
-	cout << "Initializing Vending Machine..." << endl; // Debug
+	cout << "Initializing Vending Machine..." << endl; // !Debug
 
 	vending_machine->size = rand() % 4 + 9; // Generates a random number between 9 and 12 (including both)
 	
-	cout << "Vending Machine Size: " << vending_machine->size << endl << endl; // Debug
+	cout << "Vending Machine Size: " << vending_machine->size << endl << endl; // !Debug
 
 
 	vending_machine->slots = new Slot[vending_machine->size]; // The vending machine is an array of slots.
@@ -23,7 +32,7 @@ void vending_machine_initialization(Vending_machine* vending_machine, Products* 
 
 	}
 
-	print_array(initialization_products->array, initialization_products->lenght); //DEBUG
+	print_array(initialization_products->array, initialization_products->lenght); // !Debug: Prints the remaining products that were not used in the initialization.
 
 	
 
@@ -31,7 +40,7 @@ void vending_machine_initialization(Vending_machine* vending_machine, Products* 
 
 }
 
-void save_vending_machine(Vending_machine* vending_machine, string* save_location) {
+void save_vending_machine(Vending_machine* vending_machine, string* save_location) { // Saves the vending machine to a chosen file location.
 
     ofstream file(*save_location);
     
@@ -59,7 +68,49 @@ void save_vending_machine(Vending_machine* vending_machine, string* save_locatio
 
 }
 
-void load_vending_machine() {
+void load_vending_machine(string* save_location, Vending_machine* vending_machine ) { // // Loads a chosen file location to a memory address reserved for a vending machine.
+
+	ifstream file(*save_location);
+
+    if (file.is_open()) {
+
+        string line = "";
+
+
+		// Reads the first line (where the machine size is located), and loads the machine size to the value read.
+		getline(file, line);
+		vending_machine->size = stoi(line.substr(22));
+		vending_machine->slots = new Slot[vending_machine->size];
+
+		cout << "Loaded machine size: " << vending_machine->size << endl; // Debug
+
+		// Reads and then loads each slot.
+		for (int i = 0; i < vending_machine->size; i++) {
+			getline(file, line); // The first line is always a space that separates each slot.
+			getline(file, line); // Slot letter.
+			vending_machine->slots[i].letter = line[13];
+			getline(file, line); // Slot capacity.
+			vending_machine->slots[i].capacity = stoi(line.substr(15));
+			getline(file, line); // Current number of products.
+			vending_machine->slots[i].current_number_of_products = stoi(line.substr(28));
+			getline(file, line); // Product name.
+			vending_machine->slots[i].product_name = line.substr(14);
+			getline(file, line); // Slot price.
+			vending_machine->slots[i].price = stof(line.substr(12));
+
+		}
+
+
+        file.close();
+        
+
+
+
+
+
+    }
+    else cout << *save_location << "is being used by another process." << endl;
+
 
 
 }
