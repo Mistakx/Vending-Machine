@@ -4,53 +4,57 @@ using namespace std;
 
 //___________________________________________________________________
 // Structs
-struct slot {
-
-	char letter = '@'; // I need to initialize to something, why not something that is going to catch my eye if anything goes wrong?
-	int capacity = 0;
-	string product_name = "";
-	int current_number_of_products = 0;
-	float price = 0;
 
 
+struct Slot {
+
+	char letter = '@'; // I need to initialize to something else than an empty, why not something that is going to catch my eye if anything goes wrong?
+	int capacity = 0; // The maximum capacity of each slot.
+	string product_name = ""; // The product name that is currently in each slot.
+	int current_number_of_products = 0; // The current number of products that each slot contains.
+	float price = 0; // The current price of each slot.
 };
-struct product {
+struct Vending_machine {
+	Slot* slots = 0; // The machine itself is an array of slots.
+	int size = 0; // The number of slots the machine contains.
+};
+struct Product {
 
 	string name = "";
 	string manufacturer = "";
 	float price = 0;
 
 };
-struct products {
-	string* array = 0;
-	int lenght = 0;
+struct Products {
+	string* array = 0; // The array that contains each product.
+	int lenght = 0; // The array lenght.
 };
-struct prices {
-
-	float* array = 0;
-	int lenght = 0;
+struct Prices {
+	float* array = 0; // The array that contains each price.
+	int lenght = 0; // The array lenght.
 };
 
 
 //___________________________________________________________________
 // vending_machine.cpp
-slot* vending_machine_initialization(products* initialization_products, prices* text_prices);
+void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices* text_prices);
+void save_vending_machine(Vending_machine* vending_machine, string* save_location);
 
 
 //___________________________________________________________________
 // slots.cpp
-void slot_initialization(slot slot_to_initialize, int slot_position, products* initialization_products, prices* text_prices);
+void slot_initialization(Slot* slot_to_initialize, int slot_position, Products* initialization_products, Prices* text_prices);
 char slot_letter(int slot_position);
 
 
 //___________________________________________________________________
 // products.cpp 
-string choose_random_product(products* products_to_choose_from);
+string choose_random_product(Products* products_to_choose_from);
 
 //___________________________________________________________________
 // files.cpp
-products products_to_struct(string file_path);
-prices prices_to_struct(string file_path);
+Products products_to_struct(string* file_path);
+Prices prices_to_struct(string* file_path);
 
 
 

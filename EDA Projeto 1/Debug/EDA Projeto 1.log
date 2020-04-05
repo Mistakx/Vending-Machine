@@ -1,13 +1,3 @@
-﻿  files.cpp
-  globals.cpp
-  main.cpp
-D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\main.cpp(10,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  products.cpp
-  slots.cpp
-  vending_machine.cpp
-  Generating Code...
-D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\slots.cpp(66): warning C4715: 'slot_letter': not all control paths return a value
-D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\products.cpp(43): warning C4172: returning address of local variable or temporary: new_struct
-D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\files.cpp(100): warning C4715: 'prices_to_struct': not all control paths return a value
-D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\files.cpp(152): warning C4715: 'products_to_struct': not all control paths return a value
+﻿  slots.cpp
+D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\slots.cpp(63): warning C4715: 'slot_letter': not all control paths return a value
   EDA Projeto 1.vcxproj -> D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe

@@ -13,9 +13,10 @@ void print_array(string* array, int lenght) {
 
 } // DEBUG
 
-products* delete_product(products* struct_to_delete_from, int* index_to_delete) { // Returns the same struct with a chosen array element removed.
+Products* delete_product(Products* struct_to_delete_from, int* index_to_delete) { // Returns the same struct with a chosen array element removed.
+	// Noted that this implementation is way less efficient than using a linked list and just deleting a single node, because it has to create a whole new array.
 
-	products new_struct;
+	Products new_struct;
 	// The new struct array size is one less because one element was removed.
 	new_struct.array = new string[(struct_to_delete_from->lenght) - 1]; 
 	new_struct.lenght = (struct_to_delete_from->lenght) - 1;
@@ -44,8 +45,7 @@ products* delete_product(products* struct_to_delete_from, int* index_to_delete) 
 
 }
 
-string choose_random_product(products* products_to_choose_from) { // Chooses random product from a struct, then removes that product from the struct.
-	
+string choose_random_product(Products* products_to_choose_from) { // Chooses random product from a struct, then removes that product from the struct.
 
 	int random_product_index = rand() % products_to_choose_from->lenght; // Generates a random number between 0 and the number of products still available (including both).
 	string chosen_product_name = products_to_choose_from->array[random_product_index]; // Chooses a product from the initialization_products array.

@@ -52,16 +52,15 @@ Since we chose the second implementation, now the program needs to save the file
 
 */
 
-prices prices_to_struct(string file_path) { // Reads the prices file and returns an array with each line as an element of that array.
+Prices prices_to_struct(string* file_path) { // Reads the prices file and returns an array with each line as an element of that array.
     // Ifstream - Read from files. Ofstream - Write to files.
 
-    ifstream file(file_path);
+    ifstream file(*file_path);
     
     if (file.is_open()) {
 
         string line = "";
-        prices prices; // Usually it's not good practice to give both the same name, but this struct was only created
-        // to be used once, and only here, so future confusion will not ocurr.
+        Prices prices; 
 
         while (getline(file, line)) {
             prices.lenght++; // Number of lines of the prices array.
@@ -78,11 +77,8 @@ prices prices_to_struct(string file_path) { // Reads the prices file and returns
         */
         file.seekg(0, ios::beg); // Sets the position of the next character to be extracted from the input stream back at the beginning so we can getline again.
 
+        int i = 0;
         while (getline(file, line)) {
-            static int i = 0; // The static keyword is used for two reasons:
-            // First reason: It is used so "i" is declared inside the scope of the while loop. This is to avoid "i = 0;" before the while loop. 
-            //               It's good practice to keep variables inside the scope in which they're used.
-            // Second reason: If we just put "i" inside of the while loop it resets back to 0 every time the loop is run, which obviously isn't the intended behaviour.
             prices.array[i] = stof(line); // Converts line to int before adding to array.
             i++;
         }
@@ -99,17 +95,16 @@ prices prices_to_struct(string file_path) { // Reads the prices file and returns
 
 }
 
-products products_to_struct(string file_path) { // Reads the products file and returns an array with each line as an element of that array.
+Products products_to_struct(string* file_path) { // Reads the products file and returns an array with each line as an element of that array.
     // Ifstream - Read from files. Ofstream - Write to files.
 
-    ifstream file(file_path);
+    ifstream file(*file_path);
 
 
     if (file.is_open()) {
 
         string line = "";
-        products products; // Usually it's not good practice to give both the same name, but this struct was only created
-        // to be used once, and only here, so future confusion will not ocurr.
+        Products products;
             
         while (getline(file, line)) {
             products.lenght++; // Number of lines of the products array.
@@ -125,11 +120,8 @@ products products_to_struct(string file_path) { // Reads the products file and r
         */
         file.seekg(0, ios::beg); // Sets the position of the next character to be extracted from the input stream back at the beginning so we can getline again.
 
+        int i = 0;
         while (getline(file, line)) {
-            static int i = 0; // The static keyword is used for two reasons:
-            // First reason: It is used so "i" is declared inside the scope of the while loop. This is to avoid "i = 0;" before the while loop. 
-            //               It's good practice to keep variables inside the scope in which they're used.
-            // Second reason: If we just put "i" inside of the while loop it resets back to 0 every time the loop is run, which obviously isn't the intended behaviour.
             products.array[i] = line;
             i++;
         }
