@@ -37,16 +37,16 @@ struct Prices {
 
 //___________________________________________________________________
 // vending_machine.cpp
-void print_vending_machine(Vending_machine* vending_machine);
-void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices* text_prices);
-void save_vending_machine(Vending_machine* vending_machine, string* save_location);
-void load_vending_machine(string* save_location, Vending_machine* vending_machine);
+void print_vending_machine(Vending_machine vending_machine);
+void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices text_prices);
+void save_vending_machine(Vending_machine vending_machine, string save_location);
+void load_vending_machine(string save_location, Vending_machine* vending_machine);
 
 
 //___________________________________________________________________
 // slots.cpp
-void print_slot(Slot* slot_to_print);
-void slot_initialization(Slot* slot_to_initialize, int slot_position, Products* initialization_products, Prices* text_prices);
+void print_slot(Slot slot_to_print);
+void slot_initialization(Slot* slot_to_initialize, int slot_position, Products* initialization_products, Prices text_prices);
 char slot_letter(int slot_position);
 
 //___________________________________________________________________
@@ -55,10 +55,8 @@ string choose_random_product(Products* products_to_choose_from);
 
 //___________________________________________________________________
 // files.cpp
-Products* products_to_struct(string* file_path);
-Prices* prices_to_struct(string* file_path);
-
-
+Products products_to_struct(string file_path);
+Prices prices_to_struct(string file_path);
 
 
 void print_array(string* array, int lenght);

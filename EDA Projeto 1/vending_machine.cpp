@@ -4,17 +4,26 @@
 #include "header.h"
 using namespace std;
 
-void print_vending_machine(Vending_machine* vending_machine) {
+void print_vending_machine(Vending_machine vending_machine) { // !Debug Function: Prints the Vending Machine
+	for (int i = 0; i < vending_machine.size; i++) {
 
-	for (int i = 0; i < vending_machine->size; i++) {
-
-		print_slot(&(vending_machine->slots[i]));
+		print_slot(vending_machine.slots[i]);
 
 	}
 
 }
 
-void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices* text_prices) {
+void print_array(string* array, int lenght) { // !Debug Function: Prints an array
+
+	for (int i = 0; i < lenght; i++) {
+
+		cout << array << "[" << i << "]: " << array[i] << endl;
+
+	}
+
+} 
+
+void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices text_prices) {
 
 	cout << "Initializing Vending Machine..." << endl; // !Debug
 
@@ -32,7 +41,10 @@ void vending_machine_initialization(Vending_machine* vending_machine, Products* 
 
 	}
 
-	print_array(initialization_products->array, initialization_products->lenght); // !Debug: Prints the remaining products that were not used in the initialization.
+	// !Debug: Prints the remaining products that were not used in the initialization.
+	cout << "Remaining Products: " << endl; // Debug
+	print_array(initialization_products->array, initialization_products->lenght); // Debug
+	cout << endl; // Debug
 
 	
 
@@ -40,37 +52,37 @@ void vending_machine_initialization(Vending_machine* vending_machine, Products* 
 
 }
 
-void save_vending_machine(Vending_machine* vending_machine, string* save_location) { // Saves the vending machine to a chosen file location.
+void save_vending_machine(Vending_machine vending_machine, string save_location) { // Saves the vending machine to a chosen file location.
 
-    ofstream file(*save_location);
+    ofstream file(save_location);
     
     if (file.is_open()) {
 
-		file << "Vending Machine Size: " << vending_machine->size << endl << endl;
+		file << "Vending Machine Size: " << vending_machine.size << endl << endl;
 
-		for (int i = 0; i < vending_machine->size; i++) { // For each array
+		for (int i = 0; i < vending_machine.size; i++) { // For each array
 		
-			file << "Slot Letter: " << vending_machine->slots[i].letter << endl;
-			file << "Slot Capacity: " << vending_machine->slots[i].capacity << endl;
-			file << "Current Number of Products: " << vending_machine->slots[i].current_number_of_products << endl;
-			file << "Product Name: " << vending_machine->slots[i].product_name << endl;
-			file << "Slot Price: " << vending_machine->slots[i].price << endl;
+			file << "Slot Letter: " << vending_machine.slots[i].letter << endl;
+			file << "Slot Capacity: " << vending_machine.slots[i].capacity << endl;
+			file << "Current Number of Products: " << vending_machine.slots[i].current_number_of_products << endl;
+			file << "Product Name: " << vending_machine.slots[i].product_name << endl;
+			file << "Slot Price: " << vending_machine.slots[i].price << endl;
 			file << endl;
 
 		}
 
         file.close();
 
-    } else cout << *save_location << "is being used by another process." << endl; 
+    } else cout << save_location << "is being used by another process." << endl; 
 
 
 
 
 }
 
-void load_vending_machine(string* save_location, Vending_machine* vending_machine ) { // // Loads a chosen file location to a memory address reserved for a vending machine.
+void load_vending_machine(string save_location, Vending_machine* vending_machine ) { // // Loads a chosen file location to a memory address reserved for a vending machine.
 
-	ifstream file(*save_location);
+	ifstream file(save_location);
 
     if (file.is_open()) {
 
@@ -82,7 +94,7 @@ void load_vending_machine(string* save_location, Vending_machine* vending_machin
 		vending_machine->size = stoi(line.substr(22));
 		vending_machine->slots = new Slot[vending_machine->size];
 
-		cout << "Loaded machine size: " << vending_machine->size << endl; // Debug
+		cout << "Loaded machine size: " << vending_machine->size << endl << endl; // Debug
 
 		// Reads and then loads each slot.
 		for (int i = 0; i < vending_machine->size; i++) {
@@ -109,7 +121,7 @@ void load_vending_machine(string* save_location, Vending_machine* vending_machin
 
 
     }
-    else cout << *save_location << "is being used by another process." << endl;
+    else cout << save_location << "is being used by another process." << endl;
 
 
 
