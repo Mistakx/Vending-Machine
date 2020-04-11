@@ -53,6 +53,11 @@ void vending_machine_initialization(Vending_machine* vending_machine, Products* 
 }
 
 void save_vending_machine(Vending_machine vending_machine, string save_location) { // Saves the vending machine to a chosen file location.
+	// The save file is organized in a way that it is easy to be read by both a human and a computer.
+	// Each slot is separated by a space, and it's values are always saved in the same order.
+	// The order being: Slot Letter, Slot Capacity, Current Number of Products, Product Name, Slot Price.
+	// Each line contains a string explaining what the value that follows it represents. 
+	// While the file ends up being bigger, we believe the added readability is important, and the added size is negligible.
 
     ofstream file(save_location);
     

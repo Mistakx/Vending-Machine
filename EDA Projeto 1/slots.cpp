@@ -58,3 +58,4 @@ char slot_letter(int slot_position) { // I already know the next 10 minutes are 
 	}
 
 }
+

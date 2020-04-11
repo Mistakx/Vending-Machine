@@ -1,2 +1,3 @@
-﻿  vending_machine.cpp
+﻿  main.cpp
+D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\main.cpp(11,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   EDA Projeto 1.vcxproj -> D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe

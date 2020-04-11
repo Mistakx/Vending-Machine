@@ -34,6 +34,11 @@ struct Prices {
 	int lenght = 0; // The array lenght.
 };
 
+//___________________________________________________________________
+// employee.cpp
+void clean_slot(Slot* slot);
+void clean_vending_machine(Vending_machine* vending_machine);
+void change_product_price(Vending_machine* vending_machine);
 
 //___________________________________________________________________
 // vending_machine.cpp
