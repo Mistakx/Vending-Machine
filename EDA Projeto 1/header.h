@@ -39,6 +39,9 @@ struct Prices {
 void clean_slot(Slot* slot);
 void clean_vending_machine(Vending_machine* vending_machine);
 void change_product_price(Vending_machine* vending_machine);
+void add_slot(Vending_machine* vending_machine);
+int letter_to_position(char letter);
+
 
 //___________________________________________________________________
 // vending_machine.cpp
@@ -52,7 +55,7 @@ void load_vending_machine(string save_location, Vending_machine* vending_machine
 // slots.cpp
 void print_slot(Slot slot_to_print);
 void slot_initialization(Slot* slot_to_initialize, int slot_position, Products* initialization_products, Prices text_prices);
-char slot_letter(int slot_position);
+char position_to_letter(int slot_position);
 
 //___________________________________________________________________
 // products.cpp 

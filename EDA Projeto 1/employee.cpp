@@ -18,6 +18,7 @@ void clean_vending_machine(Vending_machine* vending_machine) { // Cleans every s
 
 	}
 
+		
 }
 
 void change_product_price(Vending_machine* vending_machine) { // Changes the price of a product that the vending_machine contains.
@@ -39,7 +40,8 @@ void change_product_price(Vending_machine* vending_machine) { // Changes the pri
 	string product_name;
 	bool product_already_in_machine = false;
 
-	cout << "Qual o nome do produto cujo preço deseja alterar?" << endl;
+	cout << "Nome do produto cujo preço deseja alterar: ";
+	// TODO: Sanitize user input.
 	cin >> product_name;
 
 	for (int i = 0; i < vending_machine->size; i++) {
@@ -55,7 +57,9 @@ void change_product_price(Vending_machine* vending_machine) { // Changes the pri
 	if (product_already_in_machine) {
 
 		float new_price = 0;
-		cout << "Qual o novo preço que deseja atribuír a " << product_name << ": ";
+		cout << "Preço que deseja atribuír a " << product_name << ": ";
+
+		// TODO: Sanitize user input.
 		cin >> new_price;
 		cout << endl;
 
@@ -63,6 +67,7 @@ void change_product_price(Vending_machine* vending_machine) { // Changes the pri
 
 			if (vending_machine->slots[i].product_name == product_name) { // If the product entered is in the machine.
 
+				// TODO: Check if the machine has enough coins.
 				vending_machine->slots[i].price = new_price;
 
 			}
@@ -72,3 +77,61 @@ void change_product_price(Vending_machine* vending_machine) { // Changes the pri
 	else cout << "O produto inserido não se encontra na máquina." << endl;
 
 }
+
+void add_slot(Vending_machine* vending_machine) {
+
+	char letter = '@';
+	int capacity = 0;
+
+	cout << "Letra correspondente ao slot que pretende adicionar: ";
+	// TODO: Sanitize user input.
+	cin >> letter;
+	letter = toupper(letter); // Changes the entered letter to uppercase.
+	cout << "Capacidade do novo slot (Slot " << letter << "): ";
+	// TODO: Sanitize user input.
+	cin >> capacity;
+
+
+
+
+
+}
+
+int letter_to_position(char letter) { // Converts a slot's letter to it's corresponding position.
+	// LOL I have to do this again but in reverse?
+	// LOL even worse apparently I can't use a string as a case. Thanks a lot C++.
+
+
+	if (letter == 'A') return 0;
+	else if (letter == 'B') return 1;
+	else if (letter == 'C') return 2;
+	else if (letter == 'D') return 3;
+	else if (letter == 'E') return 4;
+	else if (letter == 'F') return 5;
+	else if (letter == 'G') return 6;
+	else if (letter == 'H') return 7;
+	else if (letter == 'I') return 8;
+	else if (letter == 'J') return 9;
+	else if (letter == 'K') return 10;
+	else if (letter == 'L') return 11;
+	else if (letter == 'M') return 12;
+	else if (letter == 'N') return 13;
+	else if (letter == 'O') return 14;
+	else if (letter == 'P') return 15;
+	else if (letter == 'Q') return 16;
+	else if (letter == 'R') return 17;
+	else if (letter == 'S') return 18;
+	else if (letter == 'T') return 19;
+	else if (letter == 'U') return 20;
+	else if (letter == 'V') return 21;
+	else if (letter == 'W') return 22;
+	else if (letter == 'X') return 23;
+	else if (letter == 'Y') return 24;
+	else if (letter == 'Z') return 25;
+
+
+	else cout << "You were the Chosen One! It was said that you would destroy the Sith, not join them!"; 
+	// Like Anakin becoming Darth Vader, this should never happen if the user inputs were correctly sanitized.
+
+}
+

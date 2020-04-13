@@ -35,8 +35,8 @@ int main() {
 	*/
 	
 	load_vending_machine(maquina_guardada_txt, &vending_machine); // Since this function changes vending_machine, we need to pass vending_machine by reference.
-	print_vending_machine(vending_machine);
-
+	//print_vending_machine(vending_machine);
+	add_slot(&vending_machine);
 	return 0;
 
 
