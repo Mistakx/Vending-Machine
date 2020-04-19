@@ -24,18 +24,30 @@
     <ClCompile Include="slots.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="products.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="files.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="employee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header.h">
+    <ClInclude Include="vending_machine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="slots.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="files.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="employee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

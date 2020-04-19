@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "header.h"
+#include "files.h"
+
 using namespace std;
 
 /*
@@ -52,7 +53,8 @@ Since we chose the second implementation, now the program needs to save the file
 
 */
 
-Prices prices_to_struct(string file_path) { // Reads the prices file and returns an array with each line as an element of that array.
+void prices_text_parsing(string file_path, Prices* prices) {
+    // Reads the prices file, parses it, and edits the prices struct to a the program can work with.
     // Ifstream - Read from files. Ofstream - Write to files.
 
     ifstream file(file_path);
@@ -60,33 +62,34 @@ Prices prices_to_struct(string file_path) { // Reads the prices file and returns
     if (file.is_open()) {
 
         string line = "";
-        Prices prices; 
 
         while (getline(file, line)) {
-            prices.lenght++; // Number of lines of the prices array.
+            prices->lenght++; // Number of lines of the prices array.
 
         } // When getline reaches the end of the file it sets an eof flag (End-of-file) on the stream.
 
-        prices.array = new float[prices.lenght]; // Array of ints. It has to be dynamically alocated because the array size isn't known at compile time.
+        prices->array = new float[prices->lenght]; // Array of ints. It has to be dynamically alocated because the array size isn't known at compile time.
 
         file.clear(); /* This clears the eof flag. While checking the documentation we found that C++ behaviour regarding this line and the next has changed.
             C++98 - If the eofbit flag is set before the seekg call, the function fails.
             C++11 - The seekg function clears the eofbit flag, if set before the call.
-            Source - http://www.cplusplus.com/reference/istream/istream/seekg/
+            !Reference: http://www.cplusplus.com/reference/istream/istream/seekg/
             Conclusion: This line isn't needed in the newer versions of C++.
         */
         file.seekg(0, ios::beg); // Sets the position of the next character to be extracted from the input stream back at the beginning so we can getline again.
 
         int i = 0;
         while (getline(file, line)) {
-            prices.array[i] = stof(line); // Converts line to int before adding to array.
+
+            // !Reference: http://www.cplusplus.com/reference/string/stof/
+            prices->array[i] = stof(line); // Converts line to float before adding to array.
             i++;
         }
 
         file.close();
-        return prices;
 
-    } else cout << file_path << "is being used by another process." << endl; 
+    } 
+    else cout << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl << endl;
 
 
 
@@ -95,22 +98,21 @@ Prices prices_to_struct(string file_path) { // Reads the prices file and returns
 
 }
 
-Products products_to_struct(string file_path) { // Reads the products file and returns an array with each line as an element of that array.
+void products_text_parsing(string file_path , Products* products) { 
+    // Reads the products file, parses it, and edits the products struct to a the program can work with.
     // Ifstream - Read from files. Ofstream - Write to files.
 
     ifstream file(file_path);
 
-
     if (file.is_open()) {
 
         string line = "";
-        Products products;
             
         while (getline(file, line)) {
-            products.lenght++; // Number of lines of the products array.
+            products->lenght++; // Number of lines of the products array.
         } // When getline reaches the end of the file it sets an eof flag (End-of-file) on the stream.
 
-        products.array = new string[products.lenght]; // Array of strings. It has to be dynamically alocated because the array size isn't known at compile time.
+        products->array = new string[products->lenght]; // Array of strings. It has to be dynamically alocated because the array size isn't known at compile time.
 
         file.clear(); /* This clears the eof flag. While checking the documentation we found that C++ behaviour regarding this line and the next has changed.
             C++98 - If the eofbit flag is set before the seekg call, the function fails.
@@ -122,19 +124,13 @@ Products products_to_struct(string file_path) { // Reads the products file and r
 
         int i = 0;
         while (getline(file, line)) {
-            products.array[i] = line;
+            products->array[i] = line;
             i++;
         }
         file.close();
-        return products;
-        
-
-
-
-
 
     }
-    else cout << file_path << "is being used by another process." << endl;
+    else cout << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl << endl;
 
 
 

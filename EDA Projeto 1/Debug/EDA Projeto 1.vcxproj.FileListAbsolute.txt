@@ -1,2 +1,4 @@
 D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe
 D:\Tools\Programming\My Programs\University\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.pdb
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.pdb

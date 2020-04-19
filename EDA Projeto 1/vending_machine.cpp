@@ -1,50 +1,55 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "header.h"
+#include "vending_machine.h"
+
 using namespace std;
 
+//! ------------------------ Vending Machine Operations ------------------------
+
+
 void print_vending_machine(Vending_machine vending_machine) { // !Debug Function: Prints the Vending Machine
+
+	cout << "------------------------ Vending Machine ------------------------" << endl << endl;
+
 	for (int i = 0; i < vending_machine.size; i++) {
 
 		print_slot(vending_machine.slots[i]);
 
 	}
 
+	cout << "------------------------ Vending Machine ------------------------" << endl << endl;
+
 }
 
-void print_array(string* array, int lenght) { // !Debug Function: Prints an array
-
-	for (int i = 0; i < lenght; i++) {
-
-		cout << array << "[" << i << "]: " << array[i] << endl;
-
-	}
-
-} 
-
-void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices text_prices) {
+void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices prices) {
 
 	cout << "Initializing Vending Machine..." << endl; // !Debug
 
+	// Initializes the vending_machine size.
 	vending_machine->size = rand() % 4 + 9; // Generates a random number between 9 and 12 (including both)
-	
 	cout << "Vending Machine Size: " << vending_machine->size << endl << endl; // !Debug
 
+	// Initializes the vending_machine coins.
+	for (int i = 0; i < 6; i++) {
 
+		vending_machine->cash_box[i] = rand() % 11 + 10; // Generates a random number between 10 and 20 (including both)
+		//cout << vending_machine->coins[i] << endl; // !Debug
+
+	}
+
+	// Initializes each vending_machine sort.
 	vending_machine->slots = new Slot[vending_machine->size]; // The vending machine is an array of slots.
-	
 	for (int i = 0; i < vending_machine->size; i++) {
 
-		slot_initialization(&vending_machine->slots[i], i, initialization_products, text_prices); // Vending Machine is an array of slots. Type: slot*. Each slot is a struct so there's no need to pass by reference. 
-		// Thanks debugger for the help :D. Usually print debugging does the work but not this time.
+		slot_initialization(&vending_machine->slots[i], i, initialization_products, prices); 
 
 	}
 
 	// !Debug: Prints the remaining products that were not used in the initialization.
-	cout << "Remaining Products: " << endl; // Debug
-	print_array(initialization_products->array, initialization_products->lenght); // Debug
-	cout << endl; // Debug
+	//cout << "Remaining Products: " << endl; // Debug
+	//print_array(initialization_products->array, initialization_products->lenght); // Debug
+	//cout << endl; // Debug
 
 	
 
@@ -52,14 +57,18 @@ void vending_machine_initialization(Vending_machine* vending_machine, Products* 
 
 }
 
-void save_vending_machine(Vending_machine vending_machine, string save_location) { // Saves the vending machine to a chosen file location.
+
+//! ------------------------ Loading and Saving ------------------------
+
+
+void save_vending_machine(Vending_machine vending_machine, string file_path) { // Saves the vending machine to a chosen file path.
 	// The save file is organized in a way that it is easy to be read by both a human and a computer.
 	// Each slot is separated by a space, and it's values are always saved in the same order.
 	// The order being: Slot Letter, Slot Capacity, Current Number of Products, Product Name, Slot Price.
 	// Each line contains a string explaining what the value that follows it represents. 
-	// While the file ends up being bigger, we believe the added readability is important, and the added size is negligible.
+	// While the file ends up being bigger, we believe the added readability is important, and the added file size is negligible.
 
-    ofstream file(save_location);
+    ofstream file(file_path);
     
     if (file.is_open()) {
 
@@ -76,18 +85,26 @@ void save_vending_machine(Vending_machine vending_machine, string save_location)
 
 		}
 
+
         file.close();
 
-    } else cout << save_location << "is being used by another process." << endl; 
+		system(("attrib +r " + file_path).c_str()); // Changes the file to read only. Only works on windows. 
+		// TODO: Cross platform this.
+		// The system function argument requires a C style string, C++ strings are different. Therefore c_str() is used.
+		// Reference 1: https://stackoverflow.com/questions/4907805/using-variables-in-system-function-c
+		// Reference 2: https://stackoverflow.com/questions/7416445/what-is-use-of-c-str-function-in-c
 
 
 
+    }
+	
+	else cout << "A problem occured while trying to open \"" << file_path << "\"." << endl << "Either it is being used by another process or it doesn't exist." << endl << endl;
 
 }
 
-void load_vending_machine(string save_location, Vending_machine* vending_machine ) { // // Loads a chosen file location to a memory address reserved for a vending machine.
+void load_vending_machine(string file_path, Vending_machine* vending_machine ) { // // Loads a chosen file to a memory address reserved for a vending machine.
 
-	ifstream file(save_location);
+	ifstream file(file_path);
 
     if (file.is_open()) {
 
@@ -117,17 +134,9 @@ void load_vending_machine(string save_location, Vending_machine* vending_machine
 
 		}
 
-
         file.close();
-        
-
-
-
-
-
     }
-    else cout << save_location << "is being used by another process." << endl;
 
-
+	else cout << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl << endl;
 
 }
