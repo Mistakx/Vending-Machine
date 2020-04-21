@@ -61,23 +61,32 @@ string choose_random_product(Products* products) { // Chooses random product fro
 }
 
 
-void print_slot(Slot slot_to_print) { // !Debug Function
+void slot_initialization(Slot* slot, int slot_position, Products* initialization_products, Prices text_prices) {
+	slot->letter = char(slot_position + 65); // Initializes the slot with it's corresponding letter.
+	slot->product_name = choose_random_product(initialization_products); // Choose a random product to place on the slot from the remaining products.
+	slot->price = text_prices.array[rand() % text_prices.lenght]; // The slot starts with a random price chosen from the prices.txt file.
+	slot->capacity = rand() % 6 + 5; // Initializes the slot with a random capacity (between 5 and 10 (including both))
+	slot->current_number_of_products = slot->capacity; // The slot starts full of products.
 
-	cout << "Slot Letter: " << slot_to_print.letter << endl;
-	cout << "Slot Capacity: " << slot_to_print.capacity << endl;
-	cout << "Current Number of Products: " << slot_to_print.current_number_of_products << endl;
-	cout << "Product Name: " << slot_to_print.product_name << endl;
-	cout << "Slot Price: " << slot_to_print.price << endl;
+}
+
+void print_slot(Slot slot) { // !Debug Function
+
+	cout << "Slot " << slot.letter << endl;
+	cout << "Produto: " << slot.product_name << endl;
+	cout << "Preço: " << slot.price << endl;	
+	cout << "Quantidade: " << slot.current_number_of_products << endl;
+	cout << "Capacidade: " << slot.capacity << endl;
+
 	cout << endl;
 
 }
 
-void slot_initialization(Slot* slot, int slot_position, Products* initialization_products, Prices text_prices) {
-	slot->letter = char(slot_position + 65); // Initializes the slot with it's corresponding letter.
-	slot->capacity = rand() % 6 + 5; // Initializes the slot with a random capacity (between 5 and 10 (including both))
-	slot->current_number_of_products = slot->capacity; // The slot starts full of products.
-	slot->product_name = choose_random_product(initialization_products); // Choose a random product to place on the slot from the remaining products.
-	slot->price = text_prices.array[rand() % text_prices.lenght]; // The slot starts with a random price chosen from the prices.txt file.
-		
+void clean_slot(Slot* slot) { // Cleans a slot
+
+	slot->current_number_of_products = 0;
+	slot->product_name = "";
+	slot->price = 0;
+
 }
 

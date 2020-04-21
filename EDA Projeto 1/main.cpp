@@ -41,14 +41,25 @@ int main() {
 		vending_machine_initialization(&vending_machine, &initialization_products, prices); // Initializes the vending machine.
 		// Both the vending_machine and the initialization_products are going to change, so they're passed by reference.
 
-		buy_product(&vending_machine);
+		print_slots(vending_machine);
+		change_product_price(&vending_machine);
 
-		//print_vending_machine(vending_machine);
+		print_slots(vending_machine);
+
+
+		print_slots(vending_machine);
+		//buy_product(&vending_machine);
+		//print_slots(vending_machine);
+
+
+
+
+		//print_slots(vending_machine);
 		//save_vending_machine(vending_machine, maquina_guardada_txt); // Since this function doesn't change vending_machine, we can pass vending_machine by value.
 		
 
 		//load_vending_machine(maquina_guardada_txt, &vending_machine); // Since this function changes vending_machine, we need to pass vending_machine by reference.
-		//print_vending_machine(vending_machine);
+		//print_slots(vending_machine);
 		//add_slot(&vending_machine);
 		//sort_products_alphabetically(&vending_machine);
 
@@ -66,6 +77,11 @@ int main() {
 
 // char + number
 
+// TODO: Check if switch cases break.
+// TODO: Allow product name to be correct even if capitalized wrong.
+// TODO: Check if cin doesnt need to be getline.
+// TODO: Check if parenthesis are needed when passing by reference.
+// TODO: Reorganize and clear console.
 // TODO: Save the cash_box as well.
 // TODO: Introduce menu back options.
 // TODO: Check all endl.

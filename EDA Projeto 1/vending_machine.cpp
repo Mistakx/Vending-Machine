@@ -8,9 +8,9 @@ using namespace std;
 //! ------------------------ Vending Machine Operations ------------------------
 
 
-void print_vending_machine(Vending_machine vending_machine) { // !Debug Function: Prints the Vending Machine
+void print_slots(Vending_machine vending_machine) { // Prints the Vending Machine
 
-	cout << "------------------------ Vending Machine ------------------------" << endl << endl;
+	cout << "------------------------ Slots ------------------------" << endl << endl;
 
 	for (int i = 0; i < vending_machine.size; i++) {
 
@@ -18,7 +18,22 @@ void print_vending_machine(Vending_machine vending_machine) { // !Debug Function
 
 	}
 
-	cout << "------------------------ Vending Machine ------------------------" << endl << endl;
+	cout << "------------------------ Slots ------------------------" << endl << endl;
+
+}
+
+void print_cashbox(Vending_machine* vending_machine) { // !Debug
+
+	cout << "----------------------- Cash Box -----------------------" << endl << endl;
+
+	cout << "2 euros: " << vending_machine->cash_box[5] << endl;
+	cout << "1 euro: " << vending_machine->cash_box[4] << endl;
+	cout << "50 cêntimos: " << vending_machine->cash_box[3] << endl;
+	cout << "20 cêntimos: " << vending_machine->cash_box[2] << endl;
+	cout << "10 cêntimos: " << vending_machine->cash_box[1] << endl;
+	cout << "5 cêntimos: " << vending_machine->cash_box[0] << endl << endl;
+
+	cout << "----------------------- Cash Box -----------------------" << endl << endl;
 
 }
 
