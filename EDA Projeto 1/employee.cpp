@@ -7,7 +7,6 @@ using namespace std;
 //! ------------------------ Machine Operations ------------------------
 
 
-
 void clean_vending_machine(Vending_machine* vending_machine) { // Cleans every slot in the machine.
 
 	for (int i = 0; i < vending_machine->size; i++) {
@@ -324,75 +323,8 @@ void print_products(Vending_machine* vending_machine) {
 
 //! ------------------------ Sorting Related Functions ------------------------
 
-void add_products_to_non_empty_slot(Vending_machine* vending_machine, int slot_position, int product_quantity, string product_name) {
 
-	// If the product quantity is higher than the slot's capacity.
-	if (product_quantity > vending_machine->slots[slot_position].capacity) {
-
-		// Fills the slot
-		vending_machine->slots[slot_position].current_number_of_products = vending_machine->slots[slot_position].capacity;
-		product_quantity -= vending_machine->slots[slot_position].capacity;
-
-		// Finds next empty slot to continue filling.
-		for (int i = slot_position; i < vending_machine->size; i++) {
-
-			if (vending_machine->slots[i].current_number_of_products == 0) {
-
-				add_products_to_empty_slot(vending_machine, i, product_quantity, product_name);
-
-			}
-
-		}
-	}
-
-	// If the product quantity is less than the slot's capacity.
-	else {
-
-		// Adds all remaining products to the slot.
-		vending_machine->slots[slot_position].current_number_of_products += product_quantity;
-
-	}
-}
-	
-void add_products_to_empty_slot(Vending_machine* vending_machine, int slot_position, int product_quantity, string product_name) {
-
-	// If the product quantity is higher than the slot's capacity.
-	if (product_quantity > vending_machine->slots[slot_position].capacity) {
-		
-		// Fills empty slot.
-		vending_machine->slots[slot_position].product_name = product_name;
-		vending_machine->slots[slot_position].current_number_of_products = vending_machine->slots[slot_position].capacity;
-		product_quantity -= vending_machine->slots[slot_position].capacity;
-
-		// Finds next empty slot to continue filling.
-		for (int i = slot_position; i < vending_machine->size; i++) {
-		
-			if (vending_machine->slots[i].current_number_of_products == 0) {
-
-				add_products_to_empty_slot(vending_machine, i, product_quantity, product_name);
-
-			}
-
-		}
-	
-	}
-
-	// If the product quantity is less than the slot's capacity.
-	else {
-
-		// Adds all remaining products to the slot.
-		vending_machine->slots[slot_position].product_name = product_name;
-		vending_machine->slots[slot_position].current_number_of_products = product_quantity;
-
-	}
-
-	
-	
-
-
-}
-
-void add_product_menu(Vending_machine* vending_machine) {
+void add_products(Vending_machine* vending_machine) {
 
 	cout << "Slot a repor: ";
 	char slot_letter = 0;
@@ -408,26 +340,71 @@ void add_product_menu(Vending_machine* vending_machine) {
 
 	for (int i = 0; i < vending_machine->size; i++) { // !Noted: Better searching algorithm could be used.
 		
-		if (vending_machine->slots[i].letter == slot_letter) { 
+		// Finds the chosen slot.
+		if (vending_machine->slots[i].letter == slot_letter) {
 
-			// If chosen slot is empty.
-			if (vending_machine->slots[i].current_number_of_products == 0) {
-				add_products_to_empty_slot(vending_machine, i, product_quantity, product_name);
+			// If the product quantity to add to the slot is bigger than that slot's capacity.
+			if (product_quantity > vending_machine->slots[i].capacity) {
 
-				// If there are any remaining products.
+				cout << "A quantidade de produtos que tentou introduzir é superior à capacidade do slot escolhido." << endl;
+
+				// Try to find an empty slot that can fit all the products.
+				bool found_fitting_empty_slot = false;
+
+				for (int x = 0; x < vending_machine->size; i++) {
+
+					// If the found slot is empty.
+					if (vending_machine->slots[x].current_number_of_products == 0) {
+
+						// If the found slot can fit all the products.
+						if (vending_machine->slots[x].capacity <= product_quantity) {
+
+							vending_machine->slots[x].product_name = product_name;
+							vending_machine->slots[x].current_number_of_products = product_quantity;
+							found_fitting_empty_slot = true;
+							cout << "Os produtos foram introduzidos num slot vazio." << endl;
+							break; // TODO: Add explanation
+						}
+					}
+				}
+
+				// If the machine doesn't have an empty slot that can fit all the products.
+				if (found_fitting_empty_slot == false) {
+
+					cout << "Não foi encontrado um slot vazio com capacidade suficiente para suportar o número de produtos inseridos." << endl;
+					cout << "O que deseja fazer: " << endl;
+					cout << "	1 - Alterar a capacidade do slot de forma a acomodar todos os produtos inseridos." << endl;
+					cout << "	2 - Inserir apenas os produtos que conseguem ser inseridos tendo em conta a capacidade do slot." << endl;
+
+					int choice = 0;
+
+					switch (choice) {
+
+					case 1:
+						vending_machine->slots[i].capacity += product_quantity;
+						vending_machine->slots[i].current_number_of_products += product_quantity;
+						vending_machine->slots[i].product_name = product_name;
+
+					case 2:
+						vending_machine->slots[i].current_number_of_products = vending_machine->slots[i].capacity;
+						vending_machine->slots[i].product_name = product_name;
+					default:
+						cout << "Perfectly balanced, as all things should be.";
+					}
+				}
+
+
+
 			}
 
-			// If chosen slot is not empty.
+			// If the product quantity to add to the slot is less than that slot's capacity.
 			else {
-				add_products_to_non_empty_slot(vending_machine, i, product_quantity, product_name);
-
+				vending_machine->slots[i].product_name = product_name;
+				vending_machine->slots[i].current_number_of_products = product_quantity;
 			}
-		
+
 		}
 
 	}
-
-
-
 
 }

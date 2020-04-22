@@ -1,6 +1,6 @@
 #include <iostream>
+#include <iomanip>
 #include "slots.h"
-
 
 using namespace std;
 
@@ -70,15 +70,18 @@ void slot_initialization(Slot* slot, int slot_position, Products* initialization
 
 }
 
-void print_slot(Slot slot) { // !Debug Function
+void print_slot(Slot slot) { // Prints a slot.
+	// This implementation uses a single line for each slot.
+	// While easier to read, if the product name is big enough, this implementation runs into problems.
+	// I believe the better readability is more important than supporting a really long product name.
 
-	cout << "Slot " << slot.letter << endl;
-	cout << "Produto: " << slot.product_name << endl;
-	cout << "Preço: " << slot.price << endl;	
-	cout << "Quantidade: " << slot.current_number_of_products << endl;
-	cout << "Capacidade: " << slot.capacity << endl;
-
-	cout << endl;
+	cout <<  left
+		<< slot.letter 
+		<< setw(8) << "" << slot.product_name
+		<< setw(10) << "" << slot.price 
+		<< setw(15) << slot.current_number_of_products 
+		<< setw(20) << slot.capacity
+		<< "\n";
 
 }
 

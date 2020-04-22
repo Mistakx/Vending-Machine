@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 #include "vending_machine.h"
 
 using namespace std;
@@ -10,7 +11,8 @@ using namespace std;
 
 void print_slots(Vending_machine vending_machine) { // Prints the Vending Machine
 
-	cout << "------------------------ Slots ------------------------" << endl << endl;
+	cout << setw(0) << "Slot      " << "Produto     " << "Quantidade " << "Capacidade" << endl;
+	cout << "---------------------------------------" << endl;
 
 	for (int i = 0; i < vending_machine.size; i++) {
 
@@ -104,6 +106,7 @@ void save_vending_machine(Vending_machine vending_machine, string file_path) { /
         file.close();
 
 		system(("attrib +r " + file_path).c_str()); // Changes the file to read only. Only works on windows. 
+		
 		// TODO: Cross platform this.
 		// The system function argument requires a C style string, C++ strings are different. Therefore c_str() is used.
 		// Reference 1: https://stackoverflow.com/questions/4907805/using-variables-in-system-function-c

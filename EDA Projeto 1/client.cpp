@@ -13,6 +13,7 @@ void buy_product(Vending_machine* vending_machine) {
 	cout << "Introduza o slot: ";
 	// !TODO: Input sanitizing.
 	cin >> chosen_slot_letter;
+
 	cout << endl;
 
 	for (int i = 0; i < vending_machine->size; i++) {
@@ -75,10 +76,10 @@ void buy_product(Vending_machine* vending_machine) {
 					// If the slot is now empty, clean it.
 					if (vending_machine->slots[i].current_number_of_products == 0) {
 
-						clean_slot(&(vending_machine->slots[i]));
+						clean_slot( &(vending_machine->slots[i]) );
 
 					}
-
+	
 					cout << "Produto devolvido, obrigado." << endl;
 
 				}

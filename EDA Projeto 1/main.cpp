@@ -46,7 +46,6 @@ int main() {
 
 		print_slots(vending_machine);
 
-
 		print_slots(vending_machine);
 		//buy_product(&vending_machine);
 		//print_slots(vending_machine);
@@ -71,12 +70,11 @@ int main() {
 		return 1;
 	}
 
-
-
 }
 
 // char + number
 
+// TODO: Check if client input is multiple of 5.
 // TODO: Check if switch cases break.
 // TODO: Allow product name to be correct even if capitalized wrong.
 // TODO: Check if cin doesnt need to be getline.
