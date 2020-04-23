@@ -70,12 +70,11 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 	refresh_console(*vending_machine);
 
-
 	cout << "Introduza o slot: ";
 	char chosen_slot_letter = 0;
 	// !TODO: Input sanitizing.
 	cin >> chosen_slot_letter;
-
+	chosen_slot_letter = toupper(chosen_slot_letter);
 	cout << endl;
 
 	bool slot_exists = false;
@@ -149,7 +148,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 					// If there is enough change
 					if (give_change(vending_machine, (total_entered - vending_machine->slots[i].price))) {
 
-						
+
 						vending_machine->slots[i].quantity--; // Removes one product from the slot.
 
 						// If the slot is now empty, clean it.
@@ -165,7 +164,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 						system("pause");
 
-						
+
 
 					}
 
@@ -188,13 +187,13 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 					cout << "Não introduziu dinheiro suficiente." << endl;
 					system("pause");
-					
+
 
 				}
 
 			}
 
-			else cout << "O slot escolhido (Slot " << chosen_slot_letter <<") está vazio." << endl;
+			else cout << "O slot escolhido (Slot " << chosen_slot_letter << ") está vazio." << endl;
 
 			check_funds(*vending_machine);
 
@@ -205,13 +204,14 @@ void buy_product_menu(Vending_machine* vending_machine) {
 			break; // Breaks the for loop because there is only one slot that matches the chosen letter.
 
 		}
+	}
 
 		if (slot_exists == false) {
-			cout << "O slot que escolheu não existe" << endl;
+			cout << "O slot que escolheu não existe." << endl;
 			system("pause");
 		}
 
-	}
+	
 }
 
 void client_menu(Vending_machine* vending_machine) {
