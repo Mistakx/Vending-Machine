@@ -1,1 +1,1 @@
-void buy_product(Vending_machine* vending_machine);
+void client_menu(Vending_machine* vending_machine);

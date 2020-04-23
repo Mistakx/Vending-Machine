@@ -34,6 +34,7 @@ Products delete_product(Products* products, int index) { // Returns the same str
 	return new_products;
 
 }
+
 string choose_random_product(Products* products) { // Chooses random product from a struct, then removes that product from the struct.
 
 	if (products->lenght != 0) { // Products to choose from ends up being zero if the products.txt file doesn't contain enough products.
@@ -60,13 +61,12 @@ string choose_random_product(Products* products) { // Chooses random product fro
 
 }
 
-
-void slot_initialization(Slot* slot, int slot_position, Products* initialization_products, Prices text_prices) {
+void initialize_slot(Slot* slot, int slot_position, Products* initialization_products, Prices text_prices) {
 	slot->letter = char(slot_position + 65); // Initializes the slot with it's corresponding letter.
-	slot->product_name = choose_random_product(initialization_products); // Choose a random product to place on the slot from the remaining products.
+	slot->product = choose_random_product(initialization_products); // Choose a random product to place on the slot from the remaining products.
 	slot->price = text_prices.array[rand() % text_prices.lenght]; // The slot starts with a random price chosen from the prices.txt file.
 	slot->capacity = rand() % 6 + 5; // Initializes the slot with a random capacity (between 5 and 10 (including both))
-	slot->current_number_of_products = slot->capacity; // The slot starts full of products.
+	slot->quantity = slot->capacity; // The slot starts full of products.
 
 }
 
@@ -77,19 +77,18 @@ void print_slot(Slot slot) { // Prints a slot.
 
 	cout <<  left
 		<< slot.letter 
-		<< setw(8) << "" << slot.product_name
+		<< setw(8) << "" << slot.product
 		<< setw(10) << "" << slot.price 
-		<< setw(15) << slot.current_number_of_products 
+		<< setw(15) << slot.quantity 
 		<< setw(20) << slot.capacity
 		<< "\n";
 
 }
 
-void clean_slot(Slot* slot) { // Cleans a slot
+void clean_slot(Slot* slot) {
 
-	slot->current_number_of_products = 0;
-	slot->product_name = "";
+	slot->quantity = 0;
+	slot->product = "Vazio";
 	slot->price = 0;
 
 }
-

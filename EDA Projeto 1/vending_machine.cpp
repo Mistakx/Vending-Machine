@@ -8,38 +8,7 @@ using namespace std;
 
 //! ------------------------ Vending Machine Operations ------------------------
 
-
-void print_slots(Vending_machine vending_machine) { // Prints the Vending Machine
-
-	cout << setw(0) << "Slot      " << "Produto     " << "Quantidade " << "Capacidade" << endl;
-	cout << "---------------------------------------" << endl;
-
-	for (int i = 0; i < vending_machine.size; i++) {
-
-		print_slot(vending_machine.slots[i]);
-
-	}
-
-	cout << "------------------------ Slots ------------------------" << endl << endl;
-
-}
-
-void print_cashbox(Vending_machine* vending_machine) { // !Debug
-
-	cout << "----------------------- Cash Box -----------------------" << endl << endl;
-
-	cout << "2 euros: " << vending_machine->cash_box[5] << endl;
-	cout << "1 euro: " << vending_machine->cash_box[4] << endl;
-	cout << "50 cêntimos: " << vending_machine->cash_box[3] << endl;
-	cout << "20 cêntimos: " << vending_machine->cash_box[2] << endl;
-	cout << "10 cêntimos: " << vending_machine->cash_box[1] << endl;
-	cout << "5 cêntimos: " << vending_machine->cash_box[0] << endl << endl;
-
-	cout << "----------------------- Cash Box -----------------------" << endl << endl;
-
-}
-
-void vending_machine_initialization(Vending_machine* vending_machine, Products* initialization_products, Prices prices) {
+void initialize_vending_machine(Vending_machine* vending_machine, Products* initialization_products, Prices prices) {
 
 	cout << "Initializing Vending Machine..." << endl; // !Debug
 
@@ -59,7 +28,7 @@ void vending_machine_initialization(Vending_machine* vending_machine, Products* 
 	vending_machine->slots = new Slot[vending_machine->size]; // The vending machine is an array of slots.
 	for (int i = 0; i < vending_machine->size; i++) {
 
-		slot_initialization(&vending_machine->slots[i], i, initialization_products, prices); 
+		initialize_slot(&vending_machine->slots[i], i, initialization_products, prices);
 
 	}
 
@@ -68,17 +37,65 @@ void vending_machine_initialization(Vending_machine* vending_machine, Products* 
 	//print_array(initialization_products->array, initialization_products->lenght); // Debug
 	//cout << endl; // Debug
 
-	
+
 
 
 
 }
 
+void clean_vending_machine(Vending_machine* vending_machine) {
 
-//! ------------------------ Loading and Saving ------------------------
+	for (int i = 0; i < vending_machine->size; i++) {
 
+		clean_slot(&vending_machine->slots[i]);
 
-void save_vending_machine(Vending_machine vending_machine, string file_path) { // Saves the vending machine to a chosen file path.
+	}
+
+}
+
+void print_slots(Vending_machine vending_machine) {
+
+	cout << setw(0) << "Slot      " << "Produto     " << "Quantidade " << "Capacidade" << endl;
+	cout << "---------------------------------------" << endl;
+
+	for (int i = 0; i < vending_machine.size; i++) {
+
+		print_slot(vending_machine.slots[i]);
+
+	}
+
+	cout << "------------------------ Slots ------------------------" << endl << endl;
+
+}
+
+void print_cashbox(Vending_machine vending_machine) {
+
+	cout << "----------------------- Cash Box -----------------------" << endl << endl;
+
+	cout << "2 euros: " << vending_machine.cash_box[5] << endl;
+	cout << "1 euro: " << vending_machine.cash_box[4] << endl;
+	cout << "50 cêntimos: " << vending_machine.cash_box[3] << endl;
+	cout << "20 cêntimos: " << vending_machine.cash_box[2] << endl;
+	cout << "10 cêntimos: " << vending_machine.cash_box[1] << endl;
+	cout << "5 cêntimos: " << vending_machine.cash_box[0] << endl << endl;
+
+	cout << "----------------------- Cash Box -----------------------" << endl << endl;
+
+}
+
+void check_funds(Vending_machine vending_machine) {
+
+	if (vending_machine.cash_box[5] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 2 euros."; }
+	if (vending_machine.cash_box[4] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 1 euro."; }
+	if (vending_machine.cash_box[3] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 50 cêntimos."; }
+	if (vending_machine.cash_box[2] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 20 cêntimos."; }
+	if (vending_machine.cash_box[1] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 10 cêntimos."; }
+	if (vending_machine.cash_box[0] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 5 cêntimos."; }
+}
+
+void vending_machine_menu(Vending_machine* vending_machine){}
+
+void save_vending_machine(Vending_machine vending_machine, string file_path) {
 	// The save file is organized in a way that it is easy to be read by both a human and a computer.
 	// Each slot is separated by a space, and it's values are always saved in the same order.
 	// The order being: Slot Letter, Slot Capacity, Current Number of Products, Product Name, Slot Price.
@@ -95,8 +112,8 @@ void save_vending_machine(Vending_machine vending_machine, string file_path) { /
 		
 			file << "Slot Letter: " << vending_machine.slots[i].letter << endl;
 			file << "Slot Capacity: " << vending_machine.slots[i].capacity << endl;
-			file << "Current Number of Products: " << vending_machine.slots[i].current_number_of_products << endl;
-			file << "Product Name: " << vending_machine.slots[i].product_name << endl;
+			file << "Current Number of Products: " << vending_machine.slots[i].quantity << endl;
+			file << "Product Name: " << vending_machine.slots[i].product << endl;
 			file << "Slot Price: " << vending_machine.slots[i].price << endl;
 			file << endl;
 
@@ -116,11 +133,11 @@ void save_vending_machine(Vending_machine vending_machine, string file_path) { /
 
     }
 	
-	else cout << "A problem occured while trying to open \"" << file_path << "\"." << endl << "Either it is being used by another process or it doesn't exist." << endl << endl;
+	else cout << "Ocorreu um problema ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl << endl;
 
 }
 
-void load_vending_machine(string file_path, Vending_machine* vending_machine ) { // // Loads a chosen file to a memory address reserved for a vending machine.
+void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
 
 	ifstream file(file_path);
 
@@ -128,13 +145,12 @@ void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
 
         string line = "";
 
-
 		// Reads the first line (where the machine size is located), and loads the machine size to the value read.
 		getline(file, line);
 		vending_machine->size = stoi(line.substr(22));
 		vending_machine->slots = new Slot[vending_machine->size];
 
-		cout << "Loaded machine size: " << vending_machine->size << endl << endl; // Debug
+		cout << "Loaded machine size: " << vending_machine->size << endl << endl; // !Debug
 
 		// Reads and then loads each slot.
 		for (int i = 0; i < vending_machine->size; i++) {
@@ -144,9 +160,9 @@ void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
 			getline(file, line); // Slot capacity.
 			vending_machine->slots[i].capacity = stoi(line.substr(15));
 			getline(file, line); // Current number of products.
-			vending_machine->slots[i].current_number_of_products = stoi(line.substr(28));
+			vending_machine->slots[i].quantity = stoi(line.substr(28));
 			getline(file, line); // Product name.
-			vending_machine->slots[i].product_name = line.substr(14);
+			vending_machine->slots[i].product = line.substr(14);
 			getline(file, line); // Slot price.
 			vending_machine->slots[i].price = stof(line.substr(12));
 

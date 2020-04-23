@@ -3,12 +3,10 @@
 
 using namespace std;
 
-
-void clean_vending_machine(Vending_machine* vending_machine);
-void change_product_price(Vending_machine* vending_machine);
-Vending_machine* add_slot(Vending_machine* vending_machine);
-
 void print_array(string* array, int lenght);
 void print_array(string* array, int lenght);
 
-void sort_products_alphabetically(Vending_machine* vending_machine);
+void employee_menu(Vending_machine* vending_machine);
+
+
+

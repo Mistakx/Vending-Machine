@@ -6,20 +6,33 @@ using namespace std;
 
 //! ------------------------ Machine Operations ------------------------
 
+void clean_slot_menu(Vending_machine* vending_machine) {
 
-void clean_vending_machine(Vending_machine* vending_machine) { // Cleans every slot in the machine.
+	cout << "Slot a limpar: ";
+	char cleaning_slot_letter = 0;
+	cin >> cleaning_slot_letter;
+
+	bool found_slot = false;
 
 	for (int i = 0; i < vending_machine->size; i++) {
-
-		clean_slot(&(vending_machine->slots[i]));
-
-	}
-
 		
+		if (vending_machine->slots[i].letter == cleaning_slot_letter) {
+
+			vending_machine->slots[i].quantity = 0;
+			vending_machine->slots[i].product = "Vazio";
+			vending_machine->slots[i].price = 0;
+			found_slot = true;
+
+			cout << "O slot " << cleaning_slot_letter << "foi limpo." << endl;
+		}
+		
+	}
+	
+	if (found_slot == false) { cout << "Não existe um slot na posição " << cleaning_slot_letter << "." << endl; }
+
 }
 
-void change_product_price(Vending_machine* vending_machine) { // Changes the price of a product that the vending_machine contains.
-	// Changing the product price is the same as changing the price of each slot that contains that product.
+void change_product_price_menu(Vending_machine* vending_machine) {
 
 	// !Implementations:
 
@@ -43,7 +56,7 @@ void change_product_price(Vending_machine* vending_machine) { // Changes the pri
 
 	for (int i = 0; i < vending_machine->size; i++) {
 
-		if (vending_machine->slots[i].product_name == product_name) { // If the product entered is in the machine.
+		if (vending_machine->slots[i].product == product_name) { // If the product entered is in the machine.
 
 			product_already_in_machine = true;
 			break; // It only needs to find the product in one slot.
@@ -65,7 +78,7 @@ void change_product_price(Vending_machine* vending_machine) { // Changes the pri
 
 			for (int i = 0; i < vending_machine->size; i++) {
 
-				if (vending_machine->slots[i].product_name == product_name) {
+				if (vending_machine->slots[i].product == product_name) {
 
 					// TODO: Check if the machine has enough coins.
 					vending_machine->slots[i].price = new_price;
@@ -80,13 +93,13 @@ void change_product_price(Vending_machine* vending_machine) { // Changes the pri
 
 }
 
-Vending_machine* add_slot(Vending_machine* vending_machine) { // Tries to add a new slot with a given letter to the machine. If a slot with the same letter already exists, show an error.
+void add_slot_menu(Vending_machine* vending_machine) {
 
 	std::cout << "Letra correspondente ao slot que pretende adicionar: ";
 	char letter = 0;
 	// TODO: Sanitize user input.
 	std::cin >> letter;
-	letter = toupper(letter); // Changes the entered letter to uppercase.
+	letter = toupper(letter); // Allows the user to input lower case letters ('a' instead of 'A').
 
 	bool slot_exists = false;
 
@@ -94,7 +107,7 @@ Vending_machine* add_slot(Vending_machine* vending_machine) { // Tries to add a 
 	
 		if (letter == vending_machine->slots[i].letter) { // If slots exists
 
-			slot_exists == true;
+			slot_exists = true;
 
 			std::cout << "Ocorreu um problema ao tentar adicionar um slot. O slot que introduziu já existe." << endl;
 
@@ -140,13 +153,13 @@ Vending_machine* add_slot(Vending_machine* vending_machine) { // Tries to add a 
 
 
 		// TODO: Delete old vending machine.
-		return new_vending_machine;
+		vending_machine = new_vending_machine;
 		
 	}
 
 }
 
-void add_coins(Vending_machine* vending_machine) {
+void add_coins_menu(Vending_machine* vending_machine) {
 
 	int coins_to_add = 0;
 
@@ -174,11 +187,12 @@ void add_coins(Vending_machine* vending_machine) {
 	cin >> coins_to_add;
 	vending_machine->cash_box[0] += coins_to_add;
 
-	print_cashbox(vending_machine);
+	print_cashbox(*vending_machine);
+	check_funds(*vending_machine);
 
 }
 
-void remove_coins(Vending_machine* vending_machine){ // Removes coins as the employee enters them, instead of removing them all at once.
+void remove_coins_menu(Vending_machine* vending_machine){ // Removes coins as the employee enters them, instead of removing them all at once.
 	// This implementation is simpler and saves memory because we only need to save on variable to RAM.
 
 	int coins_to_remove = 0;
@@ -207,12 +221,13 @@ void remove_coins(Vending_machine* vending_machine){ // Removes coins as the emp
 	cin >> coins_to_remove;
 	vending_machine->cash_box[0] -= coins_to_remove;
 
-	print_cashbox(vending_machine);
+	print_cashbox(*vending_machine);
+	check_funds(*vending_machine);
 }
 
-//! ------------------------ Sorting Related Functions ------------------------
+//! ------------------------ Sorting ------------------------
 
-void print_array(string* array, int lenght) { // Prints an array
+void print_array(string* array, int lenght) {
 
 	for (int i = 0; i < lenght; i++) {
 
@@ -223,7 +238,8 @@ void print_array(string* array, int lenght) { // Prints an array
 	}
 
 }
-void print_array(float* array, int lenght) { // Prints an array
+
+void print_array(float* array, int lenght) {
 
 	for (int i = 0; i < lenght; i++) {
 
@@ -235,7 +251,7 @@ void print_array(float* array, int lenght) { // Prints an array
 
 }
 
-bool is_in_array(string word, string* array, int array_lenght) { // Checks if a word is already in an array.
+bool is_in_array(string word, string* array, int array_lenght) {
 
 	for (int i = 0; i < array_lenght; i++) {
 
@@ -246,7 +262,8 @@ bool is_in_array(string word, string* array, int array_lenght) { // Checks if a 
 	return false;
 
 }
-bool is_in_array(float value, float* array, int array_lenght) { // Checks if a value is already in an array.
+
+bool is_in_array(float value, float* array, int array_lenght) {
 
 	for (int i = 0; i < array_lenght; i++) {
 
@@ -258,33 +275,33 @@ bool is_in_array(float value, float* array, int array_lenght) { // Checks if a v
 
 }
 
-void sort_products_alphabetically(Vending_machine* vending_machine) { // Sorts all of the machine's products prices.
+void print_products_sorted_alphabetically(Vending_machine vending_machine) { // Sorts all of the machine's products prices.
 	// Copies prices to an array, and then sorts that array.
 	// This aproach is slower than sorting them directly before copying them to an array, but it's easier to code, understand, and change in the future.
 
 	// The number of maximum unique product names that can exist, is the same as the number of slots (if each slot has an unique product).
 	// While we could first check the number of unique product names before storing them to an array (to avoid allocating more space than we need to), there isn't a need to do so.
 	// The machine doesn't have enough slots to warrant this memory optimization. We will simply delete the allocated array after the function runs.
-	string* sorted_names = new string[vending_machine->size]{}; // Initializes the array.
+	string* sorted_names = new string[vending_machine.size]{}; // Initializes the array.
 
-	for (int i = 0; i < vending_machine->size; i++) {
+	for (int i = 0; i < vending_machine.size; i++) {
 
 
 		// Check if the price isn't already in the array before copying, to avoid duplication.
-		if (is_in_array(vending_machine->slots[i].product_name, sorted_names, vending_machine->size) == false) {
+		if (is_in_array(vending_machine.slots[i].product, sorted_names, vending_machine.size) == false) {
 
-			sorted_names[i] = vending_machine->slots[i].product_name;
+			sorted_names[i] = vending_machine.slots[i].product;
 
 		}
 
 	}
 
-	// Sorts all products
+	// TODO: Sorts all products
 
 
 
 	// Prints prices to the console
-	print_array(sorted_names, vending_machine->size);
+	print_array(sorted_names, vending_machine.size);
 
 	delete[] sorted_names;
 
@@ -294,7 +311,7 @@ void sort_products_alphabetically(Vending_machine* vending_machine) { // Sorts a
 
 }
 
-void print_products(Vending_machine* vending_machine) {
+void print_products_menu(Vending_machine vending_machine) {
 
 	int option = 0;
 
@@ -308,7 +325,7 @@ void print_products(Vending_machine* vending_machine) {
 
 	switch (option) {
 	
-		case 1: sort_products_alphabetically;
+		case 1: print_products_sorted_alphabetically;
 			/*
 		case 2: sort_products_by_price;
 
@@ -321,90 +338,235 @@ void print_products(Vending_machine* vending_machine) {
 
 }
 
-//! ------------------------ Sorting Related Functions ------------------------
+//! ------------------------ Add Products ------------------------
 
+bool add_to_fitting_empty_slot(Vending_machine* vending_machine, int adding_quantity, string adding_product){
 
-void add_products(Vending_machine* vending_machine) {
+	// Try to find an empty slot that can fit all the products.
+	bool found_fitting_empty_slot = false;
 
-	cout << "Slot a repor: ";
-	char slot_letter = 0;
-	cin >> slot_letter;
+	for (int i = 0; i < vending_machine->size; i++) {
 
-	cout << "Número de produtos a repor: ";
-	int product_quantity = 0;
-	cin >> product_quantity;
+		// If the found slot is empty.
+		if (vending_machine->slots[i].quantity == 0) {
 
-	cout << "Nome do produto: ";
-	string product_name = "";
-	cin >> product_name;
+			// If the found slot can fit all the products.
+			if (vending_machine->slots[i].capacity <= adding_quantity) {
 
-	for (int i = 0; i < vending_machine->size; i++) { // !Noted: Better searching algorithm could be used.
-		
-		// Finds the chosen slot.
-		if (vending_machine->slots[i].letter == slot_letter) {
-
-			// If the product quantity to add to the slot is bigger than that slot's capacity.
-			if (product_quantity > vending_machine->slots[i].capacity) {
-
-				cout << "A quantidade de produtos que tentou introduzir é superior à capacidade do slot escolhido." << endl;
-
-				// Try to find an empty slot that can fit all the products.
-				bool found_fitting_empty_slot = false;
-
-				for (int x = 0; x < vending_machine->size; i++) {
-
-					// If the found slot is empty.
-					if (vending_machine->slots[x].current_number_of_products == 0) {
-
-						// If the found slot can fit all the products.
-						if (vending_machine->slots[x].capacity <= product_quantity) {
-
-							vending_machine->slots[x].product_name = product_name;
-							vending_machine->slots[x].current_number_of_products = product_quantity;
-							found_fitting_empty_slot = true;
-							cout << "Os produtos foram introduzidos num slot vazio." << endl;
-							break; // TODO: Add explanation
-						}
-					}
-				}
-
-				// If the machine doesn't have an empty slot that can fit all the products.
-				if (found_fitting_empty_slot == false) {
-
-					cout << "Não foi encontrado um slot vazio com capacidade suficiente para suportar o número de produtos inseridos." << endl;
-					cout << "O que deseja fazer: " << endl;
-					cout << "	1 - Alterar a capacidade do slot de forma a acomodar todos os produtos inseridos." << endl;
-					cout << "	2 - Inserir apenas os produtos que conseguem ser inseridos tendo em conta a capacidade do slot." << endl;
-
-					int choice = 0;
-
-					switch (choice) {
-
-					case 1:
-						vending_machine->slots[i].capacity += product_quantity;
-						vending_machine->slots[i].current_number_of_products += product_quantity;
-						vending_machine->slots[i].product_name = product_name;
-
-					case 2:
-						vending_machine->slots[i].current_number_of_products = vending_machine->slots[i].capacity;
-						vending_machine->slots[i].product_name = product_name;
-					default:
-						cout << "Perfectly balanced, as all things should be.";
-					}
-				}
-
-
-
+				vending_machine->slots[i].product = adding_product;
+				vending_machine->slots[i].quantity = adding_quantity;
+				found_fitting_empty_slot = true;
+				break; // TODO: Add explanation
 			}
+		}
+	}
 
-			// If the product quantity to add to the slot is less than that slot's capacity.
-			else {
-				vending_machine->slots[i].product_name = product_name;
-				vending_machine->slots[i].current_number_of_products = product_quantity;
-			}
+	if (found_fitting_empty_slot) { cout << "Os produtos foram introduzidos num slot vazio." << endl; }
+	else { cout << "Não foi encontrado nenhum slot vazio com capacidade suficiente para suportar o número de produtos inseridos." << endl; }
+
+	return found_fitting_empty_slot;
+
+
+}
+
+void employee_choices(Vending_machine* vending_machine, int slot_position, char adding_slot_letter, int adding_quantity, string adding_product) {
+
+	cout << "O que deseja fazer: " << endl;
+	cout << "	1 - Alterar a capacidade do slot " << adding_slot_letter << " de forma a acomodar todos os produtos inseridos." << endl;
+	cout << "	2 - Inserir apenas os produtos que conseguem ser inseridos tendo em conta a capacidade do slot " << adding_slot_letter << "." << endl;
+
+	int choice = 0;
+
+	switch (choice) {
+
+	case 1:
+		vending_machine->slots[slot_position].quantity += adding_quantity;
+		vending_machine->slots[slot_position].capacity = vending_machine->slots[slot_position].quantity;
+		vending_machine->slots[slot_position].product = adding_product;
+
+	case 2:
+		vending_machine->slots[slot_position].quantity = vending_machine->slots[slot_position].capacity;
+		vending_machine->slots[slot_position].product = adding_product;
+	default:
+		cout << "Perfectly balanced, as all things should be.";
+	}
+}
+
+void add_products(Vending_machine* vending_machine, int slot_position, char adding_slot_letter, int adding_quantity, string adding_product) {
+	
+	// If the product quantity to add to the slot overfills that slot.
+	if ((adding_quantity + vending_machine->slots[slot_position].quantity) > vending_machine->slots[slot_position].capacity) {
+
+		cout << "A quantidade de produtos que tentou introduzir não cabe no slot escolhido." << endl;
+
+		// If the machine doesn't have an empty slot that can fit all the products.
+		if (add_to_fitting_empty_slot(vending_machine, adding_quantity, adding_product) == false) {
+
+			employee_choices(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product);
 
 		}
 
+	}
+
+	// If the product quantity to add to the slot doesn't overfill the slot.
+	else {
+		vending_machine->slots[slot_position].product = adding_product;
+		vending_machine->slots[slot_position].quantity += adding_quantity;
+	}
+}
+
+void add_products_menu(Vending_machine* vending_machine) {
+
+	cout << "Slot a repor: ";
+	char adding_slot_letter = 0;
+	cin >> adding_slot_letter;
+
+	cout << "Número de produtos a repor: ";
+	int adding_quantity = 0;
+	cin >> adding_quantity;
+
+	cout << "Nome do produto: ";
+	string adding_product = "";
+	cin >> adding_product;
+
+	for (int i = 0; i < vending_machine->size; i++) { // !Noted: Binary search could be used.
+		
+		// Finds the chosen slot.
+		if (vending_machine->slots[i].letter == adding_slot_letter) {
+
+			// If the chosen slot is empty.
+			if (vending_machine->slots[i].quantity == 0){
+				add_products(vending_machine, i, adding_slot_letter, adding_quantity, adding_product);
+				
+			}
+
+			// If the chosen slot isn't empty.
+			else {
+
+				// If the chosen product is the same as the product currently in the slot.
+				if (adding_product == vending_machine->slots[i].product) {
+					add_products(vending_machine, i, adding_slot_letter, adding_quantity, adding_product);
+				}
+
+				// If the chosen product isn't the same as the product currently in the slot.
+				else {
+					cout << "O produto que tentou adicionar ao slot " << adding_slot_letter << " é diferente do produto que já lá se encontra." << endl;
+					add_to_fitting_empty_slot(vending_machine, adding_quantity, adding_product);
+					}
+
+
+				}
+
+			break;
+			}
+	}
+}
+
+void save_vending_machine_menu(Vending_machine vending_machine) {
+
+	cout << "Gravar a máquina na localização: ";
+	
+	string save_path = "";
+	cin >> save_path;
+
+	save_vending_machine(vending_machine, save_path);
+
+}
+
+void load_vending_machine(Vending_machine* vending_machine) {
+
+	cout << "Carregar a máquina gravada na localização: ";
+
+	string load_path = "";
+	cin >> load_path;
+
+	load_vending_machine(load_path, vending_machine);
+
+
+}
+
+void employee_menu(Vending_machine* vending_machine){
+
+	system("cls"); // Cleans the console. Windows: "cls". UNIX: "clear"
+	cout << endl;
+
+	print_slots(*vending_machine);
+	print_cashbox(*vending_machine);
+
+	cout << "Menu Funcionário" << endl
+		<< "  1 - Limpar Máquina" << endl
+		<< "  2 - Limpar Slot" << endl
+		<< "  3 - Adicionar Produto" << endl
+		<< "  4 - Alterar Preço" << endl
+		<< "  5 - Adicionar Slot" << endl
+		<< "  6 - Adicionar Moedas" << endl
+		<< "  7 - Remover Moedas" << endl
+		<< "  8 - Imprimir Produtos" << endl
+		<< "  9 - Imprimir Slots" << endl
+		<< "  10 - Imprimir Caixa" << endl
+		<< "  11 - Gravar Máquina" << endl
+		<< "  12 - Carregar Máquina" << endl
+		<< "  0 - Voltar" << endl;
+
+	int choice = 0;
+	cin >> choice;
+
+	switch (choice)
+	{
+
+	case 1: 
+		clean_vending_machine(vending_machine);
+		employee_menu(vending_machine);
+
+	case 2: 
+		clean_slot_menu(vending_machine);
+		employee_menu(vending_machine);
+
+	case 3: 
+		add_products_menu(vending_machine);
+		employee_menu(vending_machine);
+
+	case 4:
+		change_product_price_menu(vending_machine);
+		employee_menu(vending_machine);
+
+	case 5:
+		add_slot_menu(vending_machine);
+		employee_menu(vending_machine);
+
+	case 6:
+		add_coins_menu(vending_machine);
+		employee_menu(vending_machine);
+
+	case 7:
+		remove_coins_menu(vending_machine);
+		employee_menu(vending_machine);
+
+	case 8:
+		print_products_menu(*vending_machine);
+		employee_menu(vending_machine);
+	
+	case 9:
+		print_slots(*vending_machine);
+		employee_menu(vending_machine);
+
+	case 10:
+		print_cashbox(*vending_machine);
+		employee_menu(vending_machine);
+
+	case 11:
+		save_vending_machine_menu(*vending_machine);
+		employee_menu(vending_machine);
+
+	case 12:
+		load_vending_machine(vending_machine);
+		employee_menu(vending_machine);
+
+	case 0:
+		break;
+
+	default:
+		break;
 	}
 
 }
