@@ -76,11 +76,11 @@ void print_slot(Slot slot) { // Prints a slot.
 	// I believe the better readability is more important than supporting a really long product name.
 
 	cout <<  left
-		<< slot.letter 
-		<< setw(8) << "" << slot.product
-		<< setw(10) << "" << slot.price 
-		<< setw(15) << slot.quantity 
-		<< setw(20) << slot.capacity
+		<< setw(10) << slot.letter 
+		<< setw(25) << slot.product
+		<< setw(10) <<  slot.price 
+		<< setw(10) << slot.quantity 
+		<< setw(10) << slot.capacity
 		<< "\n";
 
 }

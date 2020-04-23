@@ -43,9 +43,12 @@ int main() {
 
         while (true) {
 
+            system("cls");
+            cout << endl;
+
             cout << "Modo de utilização:" << endl
                 << "  1 - Funcionário" << endl
-                << "  2 - Utilizador" << endl;
+                << "  2 - Utilizador" << endl << endl;
 
             int choice = 0;
             cin >> choice;
@@ -56,10 +59,11 @@ int main() {
 
             case 1:
                 employee_menu(&vending_machine);
+                break;
 
             case 2:
                 client_menu(&vending_machine);
-
+                break;
             default:
                 break;
             }

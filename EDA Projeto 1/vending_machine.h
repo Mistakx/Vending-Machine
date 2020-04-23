@@ -16,6 +16,8 @@ void print_slots(Vending_machine vending_machine);
 
 void print_cashbox(Vending_machine vending_machine);
 
+void refresh_console(Vending_machine vending_machine);
+
 void check_funds(Vending_machine vending_machine);
 
 void clean_vending_machine(Vending_machine* vending_machine);

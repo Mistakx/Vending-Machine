@@ -83,6 +83,14 @@ void print_cashbox(Vending_machine vending_machine) {
 
 }
 
+void refresh_console(Vending_machine vending_machine) {
+
+	system("cls");
+	print_slots(vending_machine);
+	print_cashbox(vending_machine);
+
+}
+
 void check_funds(Vending_machine vending_machine) {
 
 	if (vending_machine.cash_box[5] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 2 euros."; }
@@ -92,8 +100,6 @@ void check_funds(Vending_machine vending_machine) {
 	if (vending_machine.cash_box[1] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 10 cêntimos."; }
 	if (vending_machine.cash_box[0] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 5 cêntimos."; }
 }
-
-void vending_machine_menu(Vending_machine* vending_machine){}
 
 void save_vending_machine(Vending_machine vending_machine, string file_path) {
 	// The save file is organized in a way that it is easy to be read by both a human and a computer.
