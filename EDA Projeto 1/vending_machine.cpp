@@ -90,6 +90,8 @@ void print_cashbox(Vending_machine vending_machine) {
 
 	cout << "----------------------- Cash Box -----------------------" << endl << endl;
 
+	system("pause");
+
 }
 
 void refresh_console(Vending_machine vending_machine) {
@@ -110,21 +112,21 @@ void check_funds(Vending_machine vending_machine) {
 	if (vending_machine.cash_box[0] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 5 cêntimos."; }
 }
 
-void save_vending_machine(Vending_machine vending_machine, string file_path) {
+void save_vending_machine(Vending_machine vending_machine, string save_path) {
 	// The save file is organized in a way that it is easy to be read by both a human and a computer.
 	// Each slot is separated by a space, and it's values are always saved in the same order.
 	// The order being: Slot Letter, Slot Capacity, Current Number of Products, Product Name, Slot Price.
 	// Each line contains a string explaining what the value that follows it represents. 
 	// While the file ends up being bigger, we believe the added readability is important, and the added file size is negligible.
 
-    ofstream file(file_path);
-    
-    if (file.is_open()) {
+	ofstream file(save_path);
+
+	if (file.is_open()) {
 
 		file << "Vending Machine Size: " << vending_machine.size << endl << endl;
 
 		for (int i = 0; i < vending_machine.size; i++) { // For each array
-		
+
 			file << "Slot Letter: " << vending_machine.slots[i].letter << endl;
 			file << "Slot Capacity: " << vending_machine.slots[i].capacity << endl;
 			file << "Current Number of Products: " << vending_machine.slots[i].quantity << endl;
@@ -135,21 +137,25 @@ void save_vending_machine(Vending_machine vending_machine, string file_path) {
 		}
 
 
-        file.close();
+		file.close();
 
-		system(("attrib +r " + file_path).c_str()); // Changes the file to read only. Only works on windows. 
-		
+		system(("attrib +r " + save_path).c_str()); // Changes the file to read only. Only works on windows. 
+
 		// TODO: Cross platform this.
 		// The system function argument requires a C style string, C++ strings are different. Therefore c_str() is used.
 		// Reference 1: https://stackoverflow.com/questions/4907805/using-variables-in-system-function-c
 		// Reference 2: https://stackoverflow.com/questions/7416445/what-is-use-of-c-str-function-in-c
 
+		cout << "A máquina foi gravada em \"" << save_path << "\".";
+		system("pause");
 
+	}
 
-    }
-	
-	else cout << "Ocorreu um problema ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl << endl;
-
+	else {
+		cout << "Ocorreu um problema ao tentar abrir \"" << save_path << "\"."
+		<< endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl;
+		system("pause");
+	}
 }
 
 void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
@@ -184,6 +190,10 @@ void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
 		}
 
         file.close();
+
+		cout << "A máquina foi"" << save_vending_machine << "\".";
+
+
     }
 
 	else cout << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl << endl;

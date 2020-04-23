@@ -340,7 +340,10 @@ void print_products_menu(Vending_machine vending_machine) {
 
 	switch (option) {
 	
-		case 1: print_products_sorted_alphabetically;
+		case 1: 
+			print_products_sorted_alphabetically;
+			break;
+
 			/*
 		case 2: sort_products_by_price;
 
@@ -404,12 +407,18 @@ void employee_choices(Vending_machine* vending_machine, int slot_position, char 
 		vending_machine->slots[slot_position].quantity += adding_quantity;
 		vending_machine->slots[slot_position].capacity = vending_machine->slots[slot_position].quantity;
 		vending_machine->slots[slot_position].product = adding_product;
+		break;
+
 
 	case 2:
 		vending_machine->slots[slot_position].quantity = vending_machine->slots[slot_position].capacity;
 		vending_machine->slots[slot_position].product = adding_product;
+		break;
+
 	default:
 		cout << "Perfectly balanced, as all things should be.";
+		break;
+
 	}
 }
 
@@ -527,7 +536,7 @@ void employee_menu(Vending_machine* vending_machine){
 	cout << "Menu Funcionário:" << endl
 		<< "  1 - Limpar Máquina" << endl
 		<< "  2 - Limpar Slot" << endl
-		<< "  3 - Adicionar Produto" << endl
+		<< "  3 - Repor Produto" << endl
 		<< "  4 - Alterar Preço" << endl
 		<< "  5 - Adicionar Slot" << endl
 		<< "  6 - Adicionar Moedas" << endl
@@ -548,50 +557,73 @@ void employee_menu(Vending_machine* vending_machine){
 	case 1: 
 		clean_vending_machine(vending_machine);
 		employee_menu(vending_machine);
+		break;
 
 	case 2: 
 		clean_slot_menu(vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 3: 
 		add_products_menu(vending_machine);
 		employee_menu(vending_machine);
+		break;
 
 	case 4:
 		change_product_price_menu(vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 5:
 		add_slot_menu(vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 6:
 		add_coins_menu(vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 7:
 		remove_coins_menu(vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 8:
 		print_products_menu(*vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 	
+
 	case 9:
 		print_slots(*vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 10:
 		print_cashbox(*vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 11:
 		save_vending_machine_menu(*vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 12:
 		load_vending_machine(vending_machine);
 		employee_menu(vending_machine);
+		break;
+
 
 	case 0:
 		break;

@@ -232,6 +232,8 @@ void client_menu(Vending_machine* vending_machine) {
 	case 1:
 		buy_product_menu(vending_machine);
 		client_menu(vending_machine);
+		break;
+
 
 	case 0:
 		break;
