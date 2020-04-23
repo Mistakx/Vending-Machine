@@ -54,12 +54,13 @@ void change_product_price_menu(Vending_machine* vending_machine) {
 	// !The chosen implementation was the second. 
 	// It makes more sense to first check if the machine contains the chosen product before asking for the new price, since the change in the function's speed is almost null.
 
-	string product_name;
-	bool product_already_in_machine = false;
-
 	cout << "Nome do produto cujo preço deseja alterar: ";
+	string product_name;
 	// TODO: Sanitize user input.
-	getline(std::cin, product_name); // Needs to be getline because the products can have spaces in their names.
+	cin.ignore();
+	getline(std::cin, product_name); // Needs to be getline because the products can have spaces in their names
+
+	bool product_already_in_machine = false;
 
 	for (int i = 0; i < vending_machine->size; i++) {
 
@@ -93,10 +94,17 @@ void change_product_price_menu(Vending_machine* vending_machine) {
 				}
 			}
 		}
-		else std::cout << "Por favor introduza um valor múltiplo de 5 cêntimos." << endl;
+
+		else {
+			cout << "Por favor introduza um valor múltiplo de 5 cêntimos." << endl;
+			system("pause");
+		}
 
 	}
-	else std::cout << "O produto inserido não se encontra na máquina." << endl;
+	else {
+		cout << "O produto inserido não se encontra na máquina." << endl;
+		system("pause");
+	}
 
 }
 

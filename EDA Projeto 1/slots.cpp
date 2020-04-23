@@ -79,9 +79,9 @@ void print_slot(Slot slot) { // Prints a slot.
 		<< setw(10) << slot.letter 
 		<< setw(25) << slot.product
 		<< setw(10) <<  slot.price 
-		<< setw(10) << slot.quantity 
-		<< setw(10) << slot.capacity
-		<< "\n";
+		<< setw(15) << slot.quantity 
+		<< slot.capacity
+		<< endl;
 
 }
 

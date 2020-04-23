@@ -1,11 +1,1 @@
-﻿  client.cpp
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(24,24): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(31,23): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(37,24): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(44,24): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(115,40): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(123,41): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(131,40): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(139,41): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(149,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  EDA Projeto 1.vcxproj -> C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe
+﻿  EDA Projeto 1.vcxproj -> C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe

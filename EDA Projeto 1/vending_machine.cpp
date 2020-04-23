@@ -54,9 +54,18 @@ void clean_vending_machine(Vending_machine* vending_machine) {
 }
 
 void print_slots(Vending_machine vending_machine) {
+	
+	cout << endl;
 
-	cout << setw(0) << "Slot      " << "Produto     " << "Quantidade " << "Capacidade" << endl;
-	cout << "---------------------------------------" << endl;
+	cout << left 
+		<< setw(10) << "Slot" 
+		<< setw(25) << "Produto" 
+		<< setw(10) << "Preço" 
+		<< setw(15) << "Quantidade " 
+		<< "Capacidade" 
+		<< endl;
+
+	cout << "--------------------------------------------------------------------------------" << endl;
 
 	for (int i = 0; i < vending_machine.size; i++) {
 
@@ -64,7 +73,7 @@ void print_slots(Vending_machine vending_machine) {
 
 	}
 
-	cout << "------------------------ Slots ------------------------" << endl << endl;
+	cout << "--------------------------------------------------------------------------------" << endl;
 
 }
 
