@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 
-    locale::global(locale("")); // All future I/O and string manipulation (even the ones outside of the main function) will use the main program locale.
+    locale::global(locale("English")); // All future I/O and string manipulation/conversion (even the ones outside of the main function) will use the english program locale.
     // Messing with the locale has various non wanted effects on string to float conversion.
     srand(time(NULL)); // Initializes the random number generator time(NULL) as the seed.
     // time(NULL) is the total number of seconds that have passed since 1-Jan-1970

@@ -443,21 +443,19 @@ void add_products_menu(Vending_machine* vending_machine) {
 		// Finds the chosen slot.
 		if (vending_machine->slots[i].letter == adding_slot_letter) {
 
-			refresh_console(*vending_machine);
-			cout << "Número de produtos a repor: ";
-			int adding_quantity = 0;
-			cin >> adding_quantity;
-
-			refresh_console(*vending_machine);
-			cout << "Nome do produto: "; //TODO: CORRIGIR ISTO!
-			string adding_product = "";
-
-			cin.ignore();
-			getline(cin, adding_product);
-			
-
 			// If the chosen slot is empty.
 			if (vending_machine->slots[i].quantity == 0) {
+
+				refresh_console(*vending_machine);
+				cout << "Nome do produto: "; //TODO: CORRIGIR ISTO!
+				string adding_product = "";
+				cin.ignore();
+				getline(cin, adding_product);
+
+				refresh_console(*vending_machine);
+				cout << "Número de produtos a adicionar: ";
+				int adding_quantity = 0;
+				cin >> adding_quantity;
 
 				add_products(vending_machine, i, adding_slot_letter, adding_quantity, adding_product);
 
@@ -466,18 +464,12 @@ void add_products_menu(Vending_machine* vending_machine) {
 			// If the chosen slot isn't empty.
 			else {
 
+				refresh_console(*vending_machine);
+				cout << "Número de produtos a repor: ";
+				int adding_quantity = 0;
+				cin >> adding_quantity;
 
-				// If the chosen product is the same as the product currently in the slot.
-				if (adding_product == vending_machine->slots[i].product) {
-					add_products(vending_machine, i, adding_slot_letter, adding_quantity, adding_product);
-				}
-
-				// If the chosen product isn't the same as the product currently in the slot.
-				else {
-					cout << "O produto que tentou adicionar ao slot " << adding_slot_letter << " é diferente do produto que já lá se encontra." << endl;
-					add_to_fitting_empty_slot(vending_machine, adding_quantity, adding_product);
-				}
-
+				add_products(vending_machine, i, adding_slot_letter, adding_quantity, vending_machine->slots[i].product);
 
 			}
 
