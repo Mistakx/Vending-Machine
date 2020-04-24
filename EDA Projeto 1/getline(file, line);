@@ -1,0 +1,74 @@
+Vending Machine Size: 11
+Cash Box - 2 euros: 14
+Cash Box - 1 euro: 20
+Cash Box - 50 cents: 18
+Cash Box - 20 cents: 11
+Cash Box - 10 cents: 16
+Cash Box - 5 cents: 13
+
+Slot Letter: A
+Slot Capacity: 9
+Current Number of Products: 9
+Product Name: Maltesers
+Slot Price: 0.6
+
+Slot Letter: B
+Slot Capacity: 10
+Current Number of Products: 10
+Product Name: Mentos
+Slot Price: 1.1
+
+Slot Letter: C
+Slot Capacity: 9
+Current Number of Products: 9
+Product Name: Yoggi morango
+Slot Price: 2
+
+Slot Letter: D
+Slot Capacity: 6
+Current Number of Products: 6
+Product Name: Chips Ahoy
+Slot Price: 0.6
+
+Slot Letter: E
+Slot Capacity: 6
+Current Number of Products: 6
+Product Name: Twix
+Slot Price: 1.55
+
+Slot Letter: F
+Slot Capacity: 7
+Current Number of Products: 7
+Product Name: Pastel de Nata
+Slot Price: 1.6
+
+Slot Letter: G
+Slot Capacity: 8
+Current Number of Products: 8
+Product Name: Atlantida
+Slot Price: 2
+
+Slot Letter: H
+Slot Capacity: 8
+Current Number of Products: 8
+Product Name: Coca-Cola
+Slot Price: 0.75
+
+Slot Letter: I
+Slot Capacity: 8
+Current Number of Products: 8
+Product Name: Compal Laranja
+Slot Price: 1.55
+
+Slot Letter: J
+Slot Capacity: 7
+Current Number of Products: 7
+Product Name: Bounty
+Slot Price: 1.2
+
+Slot Letter: K
+Slot Capacity: 10
+Current Number of Products: 10
+Product Name: Lays
+Slot Price: 2
+

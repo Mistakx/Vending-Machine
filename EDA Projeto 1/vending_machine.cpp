@@ -10,17 +10,15 @@ using namespace std;
 
 void initialize_vending_machine(Vending_machine* vending_machine, Products* initialization_products, Prices prices) {
 
-	cout << "Initializing Vending Machine..." << endl; // !Debug
+	cout << "A inicializar a máquina de vendas..." << endl;
 
 	// Initializes the vending_machine size.
 	vending_machine->size = rand() % 4 + 9; // Generates a random number between 9 and 12 (including both)
-	cout << "Vending Machine Size: " << vending_machine->size << endl << endl; // !Debug
 
 	// Initializes the vending_machine coins.
 	for (int i = 0; i < 6; i++) {
 
 		vending_machine->cash_box[i] = rand() % 11 + 10; // Generates a random number between 10 and 20 (including both)
-		//cout << vending_machine->coins[i] << endl; // !Debug
 
 	}
 
@@ -93,14 +91,91 @@ void refresh_console(Vending_machine vending_machine) {
 
 }
 
-void check_funds(Vending_machine vending_machine) {
+void check_funds(Vending_machine vending_machine) { 
+	// !Noted: Improvement in case of 1 coin left
 
-	if (vending_machine.cash_box[5] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 2 euros."; }
-	if (vending_machine.cash_box[4] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 1 euro."; }
-	if (vending_machine.cash_box[3] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 50 cêntimos."; }
-	if (vending_machine.cash_box[2] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 20 cêntimos."; }
-	if (vending_machine.cash_box[1] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 10 cêntimos."; }
-	if (vending_machine.cash_box[0] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 5 cêntimos."; }
+	bool low_on_funds = false;
+
+	if (vending_machine.cash_box[5] == 0) {
+		cout << "Não existem moedas de 2 euros." << endl;
+		low_on_funds = true;
+	} 
+	else if (vending_machine.cash_box[5] == 1) {
+		cout << "Existe apenas uma moeda de 2 euros." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[5] < 4) {
+		cout << "Existem apenas " << vending_machine.cash_box[5] << " moedas de 2 euros." << endl;
+		low_on_funds = true;
+	}
+
+	if (vending_machine.cash_box[4] == 0) {
+		cout << "Não existem moedas de 1 euro." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[4] == 1) {
+		cout << "Existe apenas uma moeda de 1 euro." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[4] < 4) {
+		cout << "Existem apenas " << vending_machine.cash_box[4] << " moedas de 1 euro." << endl; 
+		low_on_funds = true; 
+	}
+
+	if (vending_machine.cash_box[3] == 0) {
+		cout << "Não existem moedas de 50 cêntimos." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[3] == 1) {
+		cout << "Existe apenas 1 moeda de 50 cêntimos." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[3] < 4) { 
+		cout << "Existem apenas " << vending_machine.cash_box[3] << " moedas de 50 cêntimos." << endl;
+		low_on_funds = true;
+	}
+
+	if (vending_machine.cash_box[2] == 0) {
+		cout << "Não existem moedas de 20 cêntimos." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[2] == 1) {
+		cout << "Existe apenas 1 moeda de 20 cêntimos." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[2] < 4) { 
+		cout << "Existem apenas " << vending_machine.cash_box[2] << " moedas de 20 cêntimos." << endl; 
+		low_on_funds = true;
+	}
+
+	if (vending_machine.cash_box[1] == 0) {
+		cout << "Não existem moedas de 10 cêntimos." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[1] == 1) {
+		cout << "Existe apenas 1 moeda de 10 cêntimos." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[1] < 4) { 
+		cout << "Existem apenas " << vending_machine.cash_box[1] << " moedas de 10 cêntimos." << endl; 
+		low_on_funds = true;
+	}
+
+	if (vending_machine.cash_box[3] == 0) {
+		cout << "Não existem moedas de 5 cêntimos." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[0] == 1) {
+		cout << "Existe apenas 1 moeda de 5 cêntimos." << endl;
+		low_on_funds = true;
+	}
+	else if (vending_machine.cash_box[0] < 4) { 
+		cout << "Existem apenas " << vending_machine.cash_box[5] << " moedas de 5 cêntimos." << endl; 
+		low_on_funds = true;
+	}
+
+	if (low_on_funds) { system("Pause"); }
+
 }
 
 void save_vending_machine(Vending_machine vending_machine, string file_path) {
@@ -114,9 +189,16 @@ void save_vending_machine(Vending_machine vending_machine, string file_path) {
 
 	if (file.is_open()) {
 
-		file << "Vending Machine Size: " << vending_machine.size << endl << endl;
+		file << "Vending Machine Size: " << vending_machine.size << endl
+			<< "Cash Box - 2 euros: " << vending_machine.cash_box[5] << endl
+			<< "Cash Box - 1 euro: " << vending_machine.cash_box[4] << endl
+			<< "Cash Box - 50 cents: " << vending_machine.cash_box[3] << endl
+			<< "Cash Box - 20 cents: " << vending_machine.cash_box[2] << endl
+			<< "Cash Box - 10 cents: " << vending_machine.cash_box[1] << endl
+			<< "Cash Box - 5 cents: " << vending_machine.cash_box[0] << endl
+			<< endl;
 
-		for (int i = 0; i < vending_machine.size; i++) { // For each array
+		for (int i = 0; i < vending_machine.size; i++) {
 
 			file << "Slot Letter: " << vending_machine.slots[i].letter << endl;
 			file << "Slot Capacity: " << vending_machine.slots[i].capacity << endl;
@@ -137,14 +219,14 @@ void save_vending_machine(Vending_machine vending_machine, string file_path) {
 		// Reference 1: https://stackoverflow.com/questions/4907805/using-variables-in-system-function-c
 		// Reference 2: https://stackoverflow.com/questions/7416445/what-is-use-of-c-str-function-in-c
 
-		cout << "A máquina foi gravada em \"" << file_path << "\".";
+		cout << "A máquina foi gravada em \"" << file_path << "\"." << endl;
 		system("pause");
 
 	}
 
 	else {
 		cout << "Ocorreu um problema ao tentar abrir \"" << file_path << "\"."
-		<< endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl;
+		<< endl << "A localização é inválida ou o ficheiro está a ser usado por outro processo." << endl;
 		system("pause");
 	}
 }
@@ -162,7 +244,19 @@ void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
 		vending_machine->size = stoi(line.substr(22));
 		vending_machine->slots = new Slot[vending_machine->size];
 
-		cout << "Loaded machine size: " << vending_machine->size << endl << endl; // !Debug
+		// Loads the coins.
+		getline(file, line);
+		vending_machine->cash_box[5] = stoi(line.substr(20));
+		getline(file, line);
+		vending_machine->cash_box[4] = stoi(line.substr(19));
+		getline(file, line);
+		vending_machine->cash_box[3] = stoi(line.substr(21));
+		getline(file, line);
+		vending_machine->cash_box[2] = stoi(line.substr(21));
+		getline(file, line);
+		vending_machine->cash_box[1] = stoi(line.substr(21));
+		getline(file, line);
+		vending_machine->cash_box[0] = stoi(line.substr(20));
 
 		// Reads and then loads each slot.
 		for (int i = 0; i < vending_machine->size; i++) {
@@ -182,11 +276,15 @@ void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
 
         file.close();
 
-		cout << "A máquina \"" << file_path << "\" foi carregada.";
+		cout << "A máquina \"" << file_path << "\" foi carregada." << endl;
+		system("Pause");
 
 
     }
 
-	else cout << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl << endl;
+	else {
+		cout << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl;
+		system("Pause");
+	}
 
 }

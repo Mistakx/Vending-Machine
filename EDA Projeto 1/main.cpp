@@ -19,7 +19,6 @@ int main() {
     // Since the machine initialization demands that all initialized slots contain different products, products.txt needs to contain enough files for the initialization to ocurr without an error.
     string products_file_path = "C:\\Users\\Mistakx\\Desktop\\produtos.txt"; 
     string prices_file_path = "C:\\Users\\Mistakx\\Desktop\\precos.txt";
-    string maquina_guardada_txt = "C:\\Users\\Mistakx\\Desktop\\maquina_guardada.txt";
 
 
     // Structs to be kept as they are after being imported from the text documents.
@@ -94,7 +93,6 @@ int main() {
 // TODO: Check if cin doesnt need to be getline.
 // TODO: Check if parenthesis are needed when passing by reference.
 // TODO: Reorganize and clear console.
-// TODO: Save the cash_box as well.
 // TODO: Introduce menu back options.
 // TODO: Check all endl.
 // TODO: Check all random number generations. 
