@@ -19,3 +19,6 @@ void print_slot(Slot slot_to_print);
 void clean_slot(Slot* slot);
 
 
+
+
+

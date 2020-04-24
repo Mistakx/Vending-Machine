@@ -1,1 +1,6 @@
-﻿  EDA Projeto 1.vcxproj -> C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe
+﻿  client.cpp
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(141,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(150,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(159,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(168,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  EDA Projeto 1.vcxproj -> C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe

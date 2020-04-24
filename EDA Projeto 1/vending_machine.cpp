@@ -57,15 +57,10 @@ void print_slots(Vending_machine vending_machine) {
 	
 	cout << endl;
 
-	cout << left 
-		<< setw(10) << "Slot" 
-		<< setw(25) << "Produto" 
-		<< setw(10) << "Preço" 
-		<< setw(15) << "Quantidade " 
-		<< "Capacidade" 
-		<< endl;
+	//! Reference: https://pt.wikipedia.org/wiki/Lista_de_abreviaturas
+	cout << left << setw(12) << "  Slot" << setw(26) << "Produto" << setw(11) << "Preço" << setw(12) << "Quant." << "Capac." << endl;
 
-	cout << "--------------------------------------------------------------------------------" << endl;
+	cout << " ------------------------------------------------------------------" << endl;
 
 	for (int i = 0; i < vending_machine.size; i++) {
 
@@ -73,24 +68,20 @@ void print_slots(Vending_machine vending_machine) {
 
 	}
 
-	cout << "--------------------------------------------------------------------------------" << endl;
+	cout << " ------------------------------------------------------------------" << endl;
+
 
 }
 
 void print_cashbox(Vending_machine vending_machine) {
 
-	cout << "----------------------- Cash Box -----------------------" << endl << endl;
+	cout << " ------------------------- Caixa -------------------------" << endl
 
-	cout << "2 euros: " << vending_machine.cash_box[5] << endl;
-	cout << "1 euro: " << vending_machine.cash_box[4] << endl;
-	cout << "50 cêntimos: " << vending_machine.cash_box[3] << endl;
-	cout << "20 cêntimos: " << vending_machine.cash_box[2] << endl;
-	cout << "10 cêntimos: " << vending_machine.cash_box[1] << endl;
-	cout << "5 cêntimos: " << vending_machine.cash_box[0] << endl << endl;
-
-	cout << "----------------------- Cash Box -----------------------" << endl << endl;
-
-	system("pause");
+		<< "| 2 euros   1 euro   50 cent   20 cent   10 cent   5 cent |" << endl
+		<< "| " << setw(10) << vending_machine.cash_box[5] << setw(9) << vending_machine.cash_box[4] << setw(10) << vending_machine.cash_box[3] 
+		<< setw(10) << vending_machine.cash_box[2] << setw(10) << vending_machine.cash_box[1] << setw(7) << vending_machine.cash_box[0] << "|" << endl
+		
+		<< " ---------------------------------------------------------" << endl << endl;
 
 }
 
@@ -112,14 +103,14 @@ void check_funds(Vending_machine vending_machine) {
 	if (vending_machine.cash_box[0] < 4) { cout << "Existem apenas " << vending_machine.cash_box[5] << "moedas de 5 cêntimos."; }
 }
 
-void save_vending_machine(Vending_machine vending_machine, string save_path) {
+void save_vending_machine(Vending_machine vending_machine, string file_path) {
 	// The save file is organized in a way that it is easy to be read by both a human and a computer.
 	// Each slot is separated by a space, and it's values are always saved in the same order.
 	// The order being: Slot Letter, Slot Capacity, Current Number of Products, Product Name, Slot Price.
 	// Each line contains a string explaining what the value that follows it represents. 
 	// While the file ends up being bigger, we believe the added readability is important, and the added file size is negligible.
 
-	ofstream file(save_path);
+	ofstream file(file_path);
 
 	if (file.is_open()) {
 
@@ -139,20 +130,20 @@ void save_vending_machine(Vending_machine vending_machine, string save_path) {
 
 		file.close();
 
-		system(("attrib +r " + save_path).c_str()); // Changes the file to read only. Only works on windows. 
+		system(("attrib +r " + file_path).c_str()); // Changes the file to read only. Only works on windows. 
 
 		// TODO: Cross platform this.
 		// The system function argument requires a C style string, C++ strings are different. Therefore c_str() is used.
 		// Reference 1: https://stackoverflow.com/questions/4907805/using-variables-in-system-function-c
 		// Reference 2: https://stackoverflow.com/questions/7416445/what-is-use-of-c-str-function-in-c
 
-		cout << "A máquina foi gravada em \"" << save_path << "\".";
+		cout << "A máquina foi gravada em \"" << file_path << "\".";
 		system("pause");
 
 	}
 
 	else {
-		cout << "Ocorreu um problema ao tentar abrir \"" << save_path << "\"."
+		cout << "Ocorreu um problema ao tentar abrir \"" << file_path << "\"."
 		<< endl << "O ficheiro não existe ou está a ser usado por outro processo." << endl;
 		system("pause");
 	}
@@ -191,7 +182,7 @@ void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
 
         file.close();
 
-		cout << "A máquina foi"" << save_vending_machine << "\".";
+		cout << "A máquina \"" << file_path << "\" foi carregada.";
 
 
     }

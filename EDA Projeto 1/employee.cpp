@@ -385,7 +385,7 @@ bool add_to_fitting_empty_slot(Vending_machine* vending_machine, int adding_quan
 	}
 	else {
 		cout << "Não foi encontrado nenhum slot vazio com capacidade suficiente para suportar o número de produtos inseridos." << endl;
-		system("pause");
+
 	}
 
 	return found_fitting_empty_slot;
@@ -395,11 +395,14 @@ bool add_to_fitting_empty_slot(Vending_machine* vending_machine, int adding_quan
 
 void employee_choices(Vending_machine* vending_machine, int slot_position, char adding_slot_letter, int adding_quantity, string adding_product) {
 
+	refresh_console(*vending_machine);
+
 	cout << "O que deseja fazer: " << endl;
 	cout << "	1 - Alterar a capacidade do slot " << adding_slot_letter << " de forma a acomodar todos os produtos inseridos." << endl;
 	cout << "	2 - Inserir apenas os produtos que conseguem ser inseridos tendo em conta a capacidade do slot " << adding_slot_letter << "." << endl;
 
 	int choice = 0;
+	cin >> choice;
 
 	switch (choice) {
 
@@ -464,7 +467,7 @@ void add_products_menu(Vending_machine* vending_machine) {
 			if (vending_machine->slots[i].quantity == 0) {
 
 				refresh_console(*vending_machine);
-				cout << "Nome do produto: "; //TODO: CORRIGIR ISTO!
+				cout << "Nome do produto: ";
 				string adding_product = "";
 				cin.ignore();
 				getline(cin, adding_product);
@@ -475,6 +478,15 @@ void add_products_menu(Vending_machine* vending_machine) {
 				cin >> adding_quantity;
 
 				add_products(vending_machine, i, adding_slot_letter, adding_quantity, adding_product);
+
+				// If the product already exits in the vending machine
+				for (int x = 0; x < vending_machine->size; x++) {
+
+					if (adding_product == vending_machine->slots[x].product) {
+						vending_machine->slots[i].price = vending_machine->slots[x].price;
+					}
+
+				}
 
 			}
 
@@ -543,9 +555,8 @@ void employee_menu(Vending_machine* vending_machine){
 		<< "  7 - Remover Moedas" << endl
 		<< "  8 - Imprimir Produtos" << endl
 		<< "  9 - Imprimir Slots" << endl
-		<< "  10 - Imprimir Caixa" << endl
-		<< "  11 - Gravar Máquina" << endl
-		<< "  12 - Carregar Máquina" << endl
+		<< "  10 - Gravar Máquina" << endl
+		<< "  11 - Carregar Máquina" << endl
 		<< "  0 - Voltar" << endl << endl;
 
 	int choice = 0;
@@ -608,18 +619,12 @@ void employee_menu(Vending_machine* vending_machine){
 
 
 	case 10:
-		print_cashbox(*vending_machine);
-		employee_menu(vending_machine);
-		break;
-
-
-	case 11:
 		save_vending_machine_menu(*vending_machine);
 		employee_menu(vending_machine);
 		break;
 
 
-	case 12:
+	case 11:
 		load_vending_machine(vending_machine);
 		employee_menu(vending_machine);
 		break;

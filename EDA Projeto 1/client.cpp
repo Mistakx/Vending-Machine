@@ -1,61 +1,81 @@
 #include <iostream>
+#include <iomanip>
 #include "vending_machine.h"
+
 using namespace std;
 
-bool give_change(Vending_machine* vending_machine, int total_entered) {
+bool give_change(Vending_machine* vending_machine, float change) {
 
-	cout << "HERE 1" << endl; // DEBUG
+	change *= 100;
+	change = round(change);
 
 	int two_euro_change = 0;
-	while ((total_entered > 2) && (vending_machine->cash_box[5] > 0)) {
+	while ((change >= 200) && (vending_machine->cash_box[5] > 0)) {
 		two_euro_change++;
-		total_entered -= 2;
+		change -= 200;
+		//change = round(change);
 	}
 
+
 	int one_euro_change = 0;
-	while ((total_entered > 1) && (vending_machine->cash_box[4] > 0)) {
+	while ((change >= 100) && (vending_machine->cash_box[4] > 0)) {
 		one_euro_change++;
-		total_entered -= 1;
+		change -= 100;
+		//change = round(change);
+
 	}
 
 	int fifty_cents_change = 0;
-	while ((total_entered > 0.50) && (vending_machine->cash_box[3] > 0)) {
+	while ((change >= 50) && (vending_machine->cash_box[3] > 0)) {
 		fifty_cents_change++;
-		total_entered -= 0.50;
-		cout << "HERE 2" << endl; // DEBUG
+		change -= 50;
+		//change = round(change);
+
 	}
 
 	int twenty_cents_change = 0;
-	while ((total_entered > 0.20) && (vending_machine->cash_box[2] > 0)) {
+	while ((change >= 20) && (vending_machine->cash_box[2] > 0)) {
 		twenty_cents_change++;
-		total_entered -= 0.5;
+		change -= 20;
+		//change = round(change);
+
 	}
 
 	int ten_cents_change = 0;
-	while ((total_entered > 0.10) && (vending_machine->cash_box[1] > 0)) {
+	while ((change >= 10) && (vending_machine->cash_box[1] > 0)) {
 		ten_cents_change++;
-		total_entered -= 0.10;
-		cout << "HERE 3" << endl; // DEBUG
+		change -= 10;
+		//change = round(change);
+
 	}
 
 	int five_cents_change = 0;
-	while ((total_entered > 0.05) && (vending_machine->cash_box[0] > 0)) {
+	while ((change >= 5) && (vending_machine->cash_box[0] > 0)) {
 		five_cents_change++;
-		total_entered -= 0.05;
+		change -= 5;
+		//change = round(change);
+
 	}
 
-	// If there was enough change.
-	if (total_entered == 0) {
-		vending_machine->cash_box[5] += two_euro_change;
-		vending_machine->cash_box[4] += one_euro_change;
-		vending_machine->cash_box[3] += fifty_cents_change;
-		vending_machine->cash_box[2] += twenty_cents_change;
-		vending_machine->cash_box[1] += ten_cents_change;
-		vending_machine->cash_box[0] += five_cents_change;
+	//change = round(change);	
+	
 
-		cout << "--------------------- Troco ----------------------" << endl
-			<< "2 euros     1 euro     50 cent     20 cent     10 cent     5 cent" << endl
-			<< two_euro_change << "     " << one_euro_change << "     " << fifty_cents_change << "     " << twenty_cents_change << "     " << ten_cents_change << "     " << five_cents_change << endl;
+	// If there was enough change.
+	if (change == 0) {
+		vending_machine->cash_box[5] -= two_euro_change;
+		vending_machine->cash_box[4] -= one_euro_change;
+		vending_machine->cash_box[3] -= fifty_cents_change;
+		vending_machine->cash_box[2] -= twenty_cents_change;
+		vending_machine->cash_box[1] -= ten_cents_change;
+		vending_machine->cash_box[0] -= five_cents_change;
+
+		cout << " ------------------------- Troco -------------------------" << endl
+
+			<< "| 2 euros   1 euro   50 cent   20 cent   10 cent   5 cent |" << endl
+			<< "| " << setw(10) << two_euro_change << setw(9) << one_euro_change << setw(10) << fifty_cents_change << setw(10) << twenty_cents_change 
+			<< setw(10) << ten_cents_change << setw(7) << five_cents_change << "|" << endl
+			
+			<< " ---------------------------------------------------------" << endl << endl;
 
 		return true;
 	}
@@ -64,6 +84,7 @@ bool give_change(Vending_machine* vending_machine, int total_entered) {
 		cout << "A máquina não tem troco suficiente." << endl;
 		return false;
 	}
+	
 }
 
 void buy_product_menu(Vending_machine* vending_machine) {
@@ -92,51 +113,59 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 				float total_entered = 0;
 
+				refresh_console(*vending_machine);
+				cout << "Escolheu: " << vending_machine->slots[i].product << endl;
+				cout << "Preço: " << vending_machine->slots[i].price << endl << endl;
 				cout << "Introduza a quantidade de moedas de 2 euros: ";
-				int two_euros = 0;
-				cin >> two_euros;
-				vending_machine->cash_box[5] += two_euros; // Adds the entered number of 2 euro coins to the cash box.
-				total_entered += 2 * two_euros;
+				int two_euro_coins = 0;
+				cin >> two_euro_coins;
+				vending_machine->cash_box[5] += two_euro_coins; // Adds the entered number of 2 euro coins to the cash box.
+				total_entered += 2 * two_euro_coins;
+
 				refresh_console(*vending_machine);
-
-
+				cout << "Escolheu: " << vending_machine->slots[i].product << endl;
+				cout << "Preço: " << vending_machine->slots[i].price << endl << endl;
 				cout << "Introduza a quantidade de moedas de 1 euro: ";
-				int one_euro = 0;
-				cin >> one_euro;
-				vending_machine->cash_box[4] += one_euro; // Adds the entered number of 1 euro coins to the cash box.
-				total_entered += 1 * one_euro;
+				int one_euro_coins = 0;
+				cin >> one_euro_coins;
+				vending_machine->cash_box[4] += one_euro_coins; // Adds the entered number of 1 euro coins to the cash box.
+				total_entered += 1 * one_euro_coins;
+
 				refresh_console(*vending_machine);
-
-
+				cout << "Escolheu: " << vending_machine->slots[i].product << endl;
+				cout << "Preço: " << vending_machine->slots[i].price << endl << endl;
 				cout << "Introduza a quantidade de moedas de 50 cêntimos: ";
-				int fifty_cents = 0;
-				cin >> fifty_cents;
-				vending_machine->cash_box[3] += fifty_cents; // Adds the entered number of 50 cents coins to the cash box.
-				total_entered += 0.50 * fifty_cents;
+				int fifty_cent_coins = 0;
+				cin >> fifty_cent_coins;
+				vending_machine->cash_box[3] += fifty_cent_coins; // Adds the entered number of 50 cents coins to the cash box.
+				total_entered += 0.50 * fifty_cent_coins;
+
 				refresh_console(*vending_machine);
-
-
+				cout << "Escolheu: " << vending_machine->slots[i].product << endl;
+				cout << "Preço: " << vending_machine->slots[i].price << endl << endl;
 				cout << "Introduza a quantidade de moedas de 20 cêntimos: ";
-				int twenty_cents = 0;
-				cin >> twenty_cents;
-				vending_machine->cash_box[2] += twenty_cents; // Adds the entered number of 20 cents coins to the cash box.
-				total_entered += 0.20 * twenty_cents;
+				int twenty_cent_coins = 0;
+				cin >> twenty_cent_coins;
+				vending_machine->cash_box[2] += twenty_cent_coins; // Adds the entered number of 20 cents coins to the cash box.
+				total_entered += 0.20 * twenty_cent_coins;
+
 				refresh_console(*vending_machine);
-
-
+				cout << "Escolheu: " << vending_machine->slots[i].product << endl;
+				cout << "Preço: " << vending_machine->slots[i].price << endl << endl;
 				cout << "Introduza a quantidade de moedas de 10 cêntimos: ";
-				int ten_cents = 0;
-				cin >> ten_cents;
-				vending_machine->cash_box[1] += ten_cents; // Adds the entered number of 10 cents coins to the cash box.
-				total_entered += (0.10 * ten_cents);
+				int ten_cent_coins = 0;
+				cin >> ten_cent_coins;
+				vending_machine->cash_box[1] += ten_cent_coins; // Adds the entered number of 10 cents coins to the cash box.
+				total_entered += (0.10 * ten_cent_coins);
+
 				refresh_console(*vending_machine);
-
-
+				cout << "Escolheu: " << vending_machine->slots[i].product << endl;
+				cout << "Preço: " << vending_machine->slots[i].price << endl << endl;
 				cout << "Introduza a quantidade de moedas de 5 cêntimos: ";
-				int five_cents = 0;
-				cin >> five_cents;
-				vending_machine->cash_box[0] += five_cents; // Adds the entered number of 5 cents coins to the cash box.
-				total_entered += (0.05 * five_cents);
+				int five_cent_coins = 0;
+				cin >> five_cent_coins;
+				vending_machine->cash_box[0] += five_cent_coins; // Adds the entered number of 5 cents coins to the cash box.
+				total_entered += (0.05 * five_cent_coins);
 				refresh_console(*vending_machine);
 
 
@@ -162,15 +191,10 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 						check_funds(*vending_machine);
 
-						system("pause");
-
-
-
 					}
 
 					else {
 						cout << "Produto não devolvido" << endl;
-						system("pause");
 					}
 				}
 
@@ -178,16 +202,14 @@ void buy_product_menu(Vending_machine* vending_machine) {
 				else {
 
 					// Gives back the coins the client entered in the vending machine.
-					vending_machine->cash_box[5] -= two_euros;
-					vending_machine->cash_box[4] -= one_euro;
-					vending_machine->cash_box[3] -= fifty_cents;
-					vending_machine->cash_box[2] -= twenty_cents;
-					vending_machine->cash_box[1] -= ten_cents;
-					vending_machine->cash_box[0] -= five_cents;
+					vending_machine->cash_box[5] -= two_euro_coins;
+					vending_machine->cash_box[4] -= one_euro_coins;
+					vending_machine->cash_box[3] -= fifty_cent_coins;
+					vending_machine->cash_box[2] -= twenty_cent_coins;
+					vending_machine->cash_box[1] -= ten_cent_coins;
+					vending_machine->cash_box[0] -= five_cent_coins;
 
 					cout << "Não introduziu dinheiro suficiente." << endl;
-					system("pause");
-
 
 				}
 
@@ -206,10 +228,10 @@ void buy_product_menu(Vending_machine* vending_machine) {
 		}
 	}
 
-		if (slot_exists == false) {
-			cout << "O slot que escolheu não existe." << endl;
-			system("pause");
-		}
+	if (slot_exists == false) {
+		cout << "O slot que escolheu não existe." << endl;
+		system("pause");
+	}
 
 	
 }

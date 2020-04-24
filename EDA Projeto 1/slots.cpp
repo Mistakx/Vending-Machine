@@ -75,13 +75,14 @@ void print_slot(Slot slot) { // Prints a slot.
 	// While easier to read, if the product name is big enough, this implementation runs into problems.
 	// I believe the better readability is more important than supporting a really long product name.
 
-	cout <<  left
+	cout <<  left 
+		<< "| " 
 		<< setw(10) << slot.letter 
-		<< setw(25) << slot.product
-		<< setw(10) <<  slot.price 
-		<< setw(15) << slot.quantity 
-		<< slot.capacity
-		<< endl;
+		<< setw(26) << slot.product
+		<< setw(11) <<  slot.price 
+		<< setw(12) << slot.quantity 
+		<< setw(6) << slot.capacity
+		<< "|" << endl;
 
 }
 
