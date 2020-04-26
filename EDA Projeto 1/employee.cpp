@@ -98,13 +98,12 @@ void change_product_price_menu(Vending_machine* vending_machine) {
 
 			// TODO: Check if implementation is correct
 			// If entered value is divisible by 5 cents. Converts 0.05 euros to 5 cents to make the conversion possible.
-			if ((int(new_price * 100) % 5) == 0) {
+			if ( (int(new_price * 100) % 5) == 0) {
 
 				for (int i = 0; i < vending_machine->size; i++) {
 
 					if (vending_machine->slots[i].product == product_name) {
 
-						// TODO: Check if the machine has enough coins.
 						vending_machine->slots[i].price = new_price;
 
 					}
@@ -140,64 +139,74 @@ void add_slot_menu(Vending_machine* vending_machine) {
 	letter = toupper(letter); // Allows the user to input lower case letters ('a' instead of 'A').
 	cout << endl;
 
-	bool slot_exists = false;
 
-	for (int i = 0; i < vending_machine->size; i++) { // Checks if slot already exists
-	
-		if (letter == vending_machine->slots[i].letter) { // If slots exists
+	if ( (int(letter) > 64) && (int(letter) < 91) ) {
 
-			slot_exists = true;
+		bool slot_exists = false;
 
-			cout << "Ocorreu um problema ao tentar adicionar um slot. O slot que introduziu já existe." << endl;
-			system("Pause");
+		for (int i = 0; i < vending_machine->size; i++) { // Checks if slot already exists
 
-			break; // Breaks because there is only one slot with each letter, so there's no need to continue checking.
+			if (letter == vending_machine->slots[i].letter) { // If slots exists
+
+				slot_exists = true;
+
+				cout << "Ocorreu um problema ao tentar adicionar um slot. O slot que introduziu já existe." << endl;
+				system("Pause");
+
+				break; // Breaks because there is only one slot with each letter, so there's no need to continue checking.
+
+			}
+
+		}
+
+		// If slot doesn't already exist, create a new vending machine with the new slot at the end.
+		if (slot_exists == false) {
+
+			cout << "Capacidade do novo slot (Slot " << letter << "): ";
+			int capacity = 0;
+			// TODO: Sanitize user input.
+			cin >> capacity;
+			cout << endl;
+
+			// The new vending machine is going to be one size bigger.
+
+			Slot* new_slots = new Slot[vending_machine->size + 1];
+
+			// Copies the slots.
+			for (int i = 0; i < vending_machine->size; i++) {
+				new_slots[i] = vending_machine->slots[i];
+			}
+
+
+			vending_machine->size += 1;
+
+			delete[] vending_machine->slots;
+			vending_machine->slots = new_slots;
+			vending_machine->slots[vending_machine->size - 1].letter = letter;
+			vending_machine->slots[vending_machine->size - 1].capacity = capacity;
+
+
+			// TODO: Sort the new machine. 
+			// !Noted: The machine only needs to be sorted after the second time this function is called.
+			// !	   The first time we are garanteed that the added letter, which was added at the end of the array, is sorted.
+			// !	   Example: The array was initialized automatically to A B C D E, we can only add one letter besides these 5 so we are garanteed the new letter is sorted.
+			// !				First time we add something: Let's say we added a Z, the new array is A B C D E Z. 
+			// !				Second time we add something: If we now want to add a H. Now the array is A B C D E Z H, so we need to sort.
+
+
 
 		}
 
 	}
-	
-	// If slot doesn't already exist, create a new vending machine with the new slot at the end.
-	if (slot_exists == false) { 
-		
-		cout << "Capacidade do novo slot (Slot " << letter << "): ";
-		int capacity = 0;
-		// TODO: Sanitize user input.
-		cin >> capacity;
-		cout << endl;
 
-		// The new vending machine is going to be one size bigger.
-
-		Slot* new_slots = new Slot[vending_machine->size + 1];	
-
-		// Copies the slots.
-		for (int i = 0; i < vending_machine->size; i++) {
-			new_slots[i] = vending_machine->slots[i];
-		}
-
-
-		vending_machine->size += 1;
-
-		delete[] vending_machine->slots;
-		vending_machine->slots = new_slots;
-		vending_machine->slots[vending_machine->size-1].letter = letter;
-		vending_machine->slots[vending_machine->size-1].capacity = capacity;
-		
-
-		// TODO: Sort the new machine. 
-		// !Noted: The machine only needs to be sorted after the second time this function is called.
-		// !	   The first time we are garanteed that the added letter, which was added at the end of the array, is sorted.
-		// !	   Example: The array was initialized automatically to A B C D E, we can only add one letter besides these 5 so we are garanteed the new letter is sorted.
-		// !				First time we add something: Let's say we added a Z, the new array is A B C D E Z. 
-		// !				Second time we add something: If we now want to add a H. Now the array is A B C D E Z H, so we need to sort.
-
-
-		// TODO: Delete old vending machine.
-
-		
+	else {
+		cout << "Por favor introduza uma letra entre A e Z" << endl;
+		system("Pause");
 	}
-
+	
 }
+
+
 
 void add_coins_menu(Vending_machine* vending_machine) {
 
@@ -694,9 +703,8 @@ void employee_menu(Vending_machine* vending_machine){
 		<< "  6 - Adicionar Moedas" << endl
 		<< "  7 - Remover Moedas" << endl
 		<< "  8 - Imprimir Produtos" << endl
-		<< "  9 - Imprimir Slots" << endl
-		<< "  10 - Gravar Máquina" << endl
-		<< "  11 - Carregar Máquina" << endl
+		<< "  9 - Gravar Máquina" << endl
+		<< "  10 - Carregar Máquina" << endl
 		<< "  0 - Voltar" << endl << endl;
 
 	int choice = 0;
@@ -750,21 +758,13 @@ void employee_menu(Vending_machine* vending_machine){
 		employee_menu(vending_machine);
 		break;
 
-	
-
 	case 9:
-		print_slots(*vending_machine);
-		employee_menu(vending_machine);
-		break;
-
-
-	case 10:
 		save_vending_machine_menu(*vending_machine);
 		employee_menu(vending_machine);
 		break;
 
 
-	case 11:
+	case 10:
 		load_vending_machine(vending_machine);
 		employee_menu(vending_machine);
 		break;

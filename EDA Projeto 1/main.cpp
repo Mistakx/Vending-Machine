@@ -14,12 +14,10 @@ int main() {
     // time(NULL) is the total number of seconds that have passed since 1-Jan-1970
     // While not totally random (nothing truly is), this pseudo-random function will do because there are no security concerns with the machine's initialization.
 
-    // TODO: Check if these should be converted to constants
 
     // Since the machine initialization demands that all initialized slots contain different products, products.txt needs to contain enough files for the initialization to ocurr without an error.
     string products_file_path = "C:\\Users\\Mistakx\\Desktop\\produtos.txt"; 
     string prices_file_path = "C:\\Users\\Mistakx\\Desktop\\precos.txt";
-
 
     // Structs to be kept as they are after being imported from the text documents.
     // These are not touched by the initialization process and remain the same for as long as the machine is running.
@@ -83,7 +81,7 @@ int main() {
 
 // char + number
 
-
+// TODO: Make so that u can't add a slot with a number as a letter.
 // TODO: check if files are correctly formatted.
 // TODO: CHEck if functions dont return in all cases.
 // TODO: Don't forget to ask for the File location.
