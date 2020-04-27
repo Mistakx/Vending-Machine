@@ -161,7 +161,7 @@ void check_funds(Vending_machine vending_machine) {
 		low_on_funds = true;
 	}
 
-	if (vending_machine.cash_box[3] == 0) {
+	if (vending_machine.cash_box[0] == 0) {
 		cout << "Não existem moedas de 5 cêntimos." << endl;
 		low_on_funds = true;
 	}
