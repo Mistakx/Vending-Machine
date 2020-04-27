@@ -187,7 +187,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 						}
 
-						cout << "Produto devolvido." << endl;
+						cout << "Produto devolvido." << endl << endl;
 
 						check_funds(*vending_machine);
 
@@ -215,9 +215,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 			}
 
-			else cout << "O slot escolhido (Slot " << chosen_slot_letter << ") está vazio." << endl;
-
-			check_funds(*vending_machine);
+			else { cout << "O slot escolhido (Slot " << chosen_slot_letter << ") está vazio." << endl; }
 
 			system("pause");
 
