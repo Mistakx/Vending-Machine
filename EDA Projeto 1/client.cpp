@@ -187,6 +187,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 						}
 
+						refresh_console(*vending_machine);
 						cout << "Produto devolvido." << endl << endl;
 
 						check_funds(*vending_machine);
@@ -194,7 +195,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 					}
 
 					else {
-						cout << "Produto não devolvido" << endl;
+						cout << "Produto não devolvido. Não existe troco suficiente." << endl;
 					}
 				}
 
