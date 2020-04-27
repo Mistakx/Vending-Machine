@@ -188,6 +188,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 						}
 
 						refresh_console(*vending_machine);
+
 						cout << "Produto devolvido." << endl << endl;
 
 						check_funds(*vending_machine);
@@ -210,15 +211,19 @@ void buy_product_menu(Vending_machine* vending_machine) {
 					vending_machine->cash_box[1] -= ten_cent_coins;
 					vending_machine->cash_box[0] -= five_cent_coins;
 
+					refresh_console(*vending_machine);
+
 					cout << "Não introduziu dinheiro suficiente." << endl;
+					system("Pause");
 
 				}
 
 			}
 
-			else { cout << "O slot escolhido (Slot " << chosen_slot_letter << ") está vazio." << endl; }
-
-			system("pause");
+			else {
+				cout << "O slot escolhido (Slot " << chosen_slot_letter << ") está vazio." << endl;
+				system("Pause");
+			}
 
 			slot_exists = true;
 
