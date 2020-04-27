@@ -10,7 +10,7 @@ bool give_change(Vending_machine* vending_machine, float change) {
 	change = round(change);
 
 	int two_euro_change = 0;
-	while ((change >= 200) && (vending_machine->cash_box[5] > 0)) {
+	while ((change >= 200) && (two_euro_change < vending_machine->cash_box[5])) {
 		two_euro_change++;
 		change -= 200;
 		//change = round(change);
@@ -18,7 +18,7 @@ bool give_change(Vending_machine* vending_machine, float change) {
 
 
 	int one_euro_change = 0;
-	while ((change >= 100) && (vending_machine->cash_box[4] > 0)) {
+	while ((change >= 100) && (one_euro_change < vending_machine->cash_box[4])) {
 		one_euro_change++;
 		change -= 100;
 		//change = round(change);
@@ -26,15 +26,16 @@ bool give_change(Vending_machine* vending_machine, float change) {
 	}
 
 	int fifty_cents_change = 0;
-	while ((change >= 50) && (vending_machine->cash_box[3] > 0)) {
+	while ((change >= 50) && (fifty_cents_change < vending_machine->cash_box[3])) {
 		fifty_cents_change++;
 		change -= 50;
 		//change = round(change);
 
+		system("Pause");
 	}
 
 	int twenty_cents_change = 0;
-	while ((change >= 20) && (vending_machine->cash_box[2] > 0)) {
+	while ((change >= 20) && (twenty_cents_change < vending_machine->cash_box[2])) {
 		twenty_cents_change++;
 		change -= 20;
 		//change = round(change);
@@ -42,7 +43,7 @@ bool give_change(Vending_machine* vending_machine, float change) {
 	}
 
 	int ten_cents_change = 0;
-	while ((change >= 10) && (vending_machine->cash_box[1] > 0)) {
+	while ((change >= 10) && (ten_cents_change < vending_machine->cash_box[1])) {
 		ten_cents_change++;
 		change -= 10;
 		//change = round(change);
@@ -50,7 +51,7 @@ bool give_change(Vending_machine* vending_machine, float change) {
 	}
 
 	int five_cents_change = 0;
-	while ((change >= 5) && (vending_machine->cash_box[0] > 0)) {
+	while ((change >= 5) && (five_cents_change < vending_machine->cash_box[0])) {
 		five_cents_change++;
 		change -= 5;
 		//change = round(change);

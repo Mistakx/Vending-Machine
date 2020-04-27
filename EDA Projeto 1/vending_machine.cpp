@@ -101,7 +101,7 @@ void check_funds(Vending_machine vending_machine) {
 		low_on_funds = true;
 	} 
 	else if (vending_machine.cash_box[5] == 1) {
-		cout << "Existe apenas uma moeda de 2 euros." << endl;
+		cout << "Existe apenas 1 moeda de 2 euros." << endl;
 		low_on_funds = true;
 	}
 	else if (vending_machine.cash_box[5] < 4) {
@@ -114,7 +114,7 @@ void check_funds(Vending_machine vending_machine) {
 		low_on_funds = true;
 	}
 	else if (vending_machine.cash_box[4] == 1) {
-		cout << "Existe apenas uma moeda de 1 euro." << endl;
+		cout << "Existe apenas 1 moeda de 1 euro." << endl;
 		low_on_funds = true;
 	}
 	else if (vending_machine.cash_box[4] < 4) {
