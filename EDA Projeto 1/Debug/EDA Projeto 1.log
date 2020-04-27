@@ -1,3 +1,6 @@
-﻿  employee.cpp
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\employee.cpp(433,4): warning C4551: function call missing argument list
+﻿  client.cpp
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(142,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(151,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(160,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(169,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   EDA Projeto 1.vcxproj -> C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe

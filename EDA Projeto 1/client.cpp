@@ -80,8 +80,9 @@ bool give_change(Vending_machine* vending_machine, float change) {
 		return true;
 	}
 
+	// If there wasn't enough change.
 	else {
-		cout << "A máquina não tem troco suficiente." << endl;
+		
 		return false;
 	}
 	
@@ -168,9 +169,6 @@ void buy_product_menu(Vending_machine* vending_machine) {
 				total_entered += (0.05 * five_cent_coins);
 				refresh_console(*vending_machine);
 
-
-				cout << "Valor Introduzido: " << total_entered << endl << endl;
-
 				// If the client entered enough money.
 				if (total_entered >= vending_machine->slots[i].price) {
 
@@ -189,6 +187,8 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 						refresh_console(*vending_machine);
 
+						cout << "Valor Introduzido: " << total_entered << endl << endl;
+
 						cout << "Produto devolvido." << endl << endl;
 
 						check_funds(*vending_machine);
@@ -196,7 +196,22 @@ void buy_product_menu(Vending_machine* vending_machine) {
 					}
 
 					else {
+
+						refresh_console(*vending_machine);
+
+						cout << "Valor Introduzido: " << total_entered << endl << endl;
+
+						// Removes the entered coins
+						vending_machine->cash_box[5] -= two_euro_coins;
+						vending_machine->cash_box[4] -= one_euro_coins;
+						vending_machine->cash_box[3] -= fifty_cent_coins;
+						vending_machine->cash_box[2] -= twenty_cent_coins;
+						vending_machine->cash_box[1] -= ten_cent_coins;
+						vending_machine->cash_box[0] -= five_cent_coins;
+
 						cout << "Produto não devolvido. Não existe troco suficiente." << endl;
+
+						system("Pause");
 					}
 				}
 
