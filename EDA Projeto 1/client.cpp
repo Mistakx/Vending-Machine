@@ -31,7 +31,6 @@ bool give_change(Vending_machine* vending_machine, float change) {
 		change -= 50;
 		//change = round(change);
 
-		system("Pause");
 	}
 
 	int twenty_cents_change = 0;
@@ -69,6 +68,8 @@ bool give_change(Vending_machine* vending_machine, float change) {
 		vending_machine->cash_box[2] -= twenty_cents_change;
 		vending_machine->cash_box[1] -= ten_cents_change;
 		vending_machine->cash_box[0] -= five_cents_change;
+
+		refresh_console(*vending_machine);
 
 		cout << " ------------------------- Troco -------------------------" << endl
 
@@ -168,7 +169,6 @@ void buy_product_menu(Vending_machine* vending_machine) {
 				cin >> five_cent_coins;
 				vending_machine->cash_box[0] += five_cent_coins; // Adds the entered number of 5 cents coins to the cash box.
 				total_entered += (0.05 * five_cent_coins);
-				refresh_console(*vending_machine);
 
 				// If the client entered enough money.
 				if (total_entered >= vending_machine->slots[i].price) {
@@ -186,21 +186,16 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 						}
 
-						refresh_console(*vending_machine);
-
 						cout << "Valor Introduzido: " << total_entered << endl << endl;
 
 						cout << "Produto devolvido." << endl << endl;
 
 						check_funds(*vending_machine);
 
+						system("Pause");
 					}
 
 					else {
-
-						refresh_console(*vending_machine);
-
-						cout << "Valor Introduzido: " << total_entered << endl << endl;
 
 						// Removes the entered coins
 						vending_machine->cash_box[5] -= two_euro_coins;
@@ -210,7 +205,11 @@ void buy_product_menu(Vending_machine* vending_machine) {
 						vending_machine->cash_box[1] -= ten_cent_coins;
 						vending_machine->cash_box[0] -= five_cent_coins;
 
-						cout << "Produto não devolvido. Não existe troco suficiente." << endl;
+						refresh_console(*vending_machine);
+
+						cout << "Valor Introduzido: " << total_entered << endl << endl;
+
+						cout << "Produto não devolvido. Não existe troco suficiente na máquina." << endl;
 
 						system("Pause");
 					}
@@ -229,7 +228,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 					refresh_console(*vending_machine);
 
-					cout << "Não introduziu dinheiro suficiente." << endl;
+					cout << "Produto não devolvido. Não introduziu dinheiro suficiente." << endl;
 					system("Pause");
 
 				}
