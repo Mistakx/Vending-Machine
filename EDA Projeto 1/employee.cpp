@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-#include "vending_machine.h"
+#include <iomanip>
+#include "employee.h"
 
 using namespace std;
 
@@ -206,8 +207,6 @@ void add_slot_menu(Vending_machine* vending_machine) {
 	
 }
 
-
-
 void add_coins_menu(Vending_machine* vending_machine) {
 
 	int coins_to_add = 0;
@@ -328,23 +327,22 @@ void remove_coins_menu(Vending_machine* vending_machine){ // Removes coins as th
 
 //! ------------------------ Sorting ------------------------
 
+bool vending_machine_is_empty(Vending_machine vending_machine) {
+
+	for (int i = 0; i < vending_machine.size; i++) {
+
+		if (vending_machine.slots[i].quantity != 0) { return false; }
+
+	}
+
+	return true;
+}
+
 void print_array(string* array, int lenght) {
 
 	for (int i = 0; i < lenght; i++) {
 
 		if (array[i] != "") cout << array[i] << endl;
-
-		//cout << array << "[" << i << "]: " << array[i] << endl; // !Debug Version
-
-	}
-
-}
-
-void print_array(float* array, int lenght) {
-
-	for (int i = 0; i < lenght; i++) {
-
-		if (array[i] != 0) cout << array[i] << endl;
 
 		//cout << array << "[" << i << "]: " << array[i] << endl; // !Debug Version
 
@@ -364,11 +362,11 @@ bool is_in_array(string word, string* array, int array_lenght) {
 
 }
 
-bool is_in_array(float value, float* array, int array_lenght) {
+bool is_in_array(string product, Slot* array, int array_lenght) {
 
 	for (int i = 0; i < array_lenght; i++) {
 
-		if (value == array[i]) { return true; }
+		if (product == array[i].product) { return true; }
 
 	}
 
@@ -383,28 +381,40 @@ void print_products_sorted_alphabetically(Vending_machine vending_machine) { // 
 	// The number of maximum unique product names that can exist, is the same as the number of slots (if each slot has an unique product).
 	// While we could first check the number of unique product names before storing them to an array (to avoid allocating more space than we need to), there isn't a need to do so.
 	// The machine doesn't have enough slots to warrant this memory optimization. We will simply delete the allocated array after the function runs.
-	string* sorted_names = new string[vending_machine.size]{}; // Initializes the array.
+	string* sorted_products = new string[vending_machine.size]{}; // Initializes the array.
 
 	for (int i = 0; i < vending_machine.size; i++) {
 
-
 		// Check if the price isn't already in the array before copying, to avoid duplication.
-		if (is_in_array(vending_machine.slots[i].product, sorted_names, vending_machine.size) == false) {
+		if (is_in_array(vending_machine.slots[i].product, sorted_products, vending_machine.size) == false) {
 
-			sorted_names[i] = vending_machine.slots[i].product;
+			sorted_products[i] = vending_machine.slots[i].product;
 
 		}
 
 	}
 
-	// TODO: Sorts all products
+	for (int j = 1; j < vending_machine.size; j++) {
 
+		string product = sorted_products[j];
+
+		int i = j - 1;
+
+		while ((i >= 0) && (sorted_products[i] > product)) {
+			sorted_products[i + 1] = sorted_products[i];
+			sorted_products[i + 1] = sorted_products[i];
+			i = i - 1;
+		}
+
+		sorted_products[i + 1] = product;
+
+	}
 
 
 	// Prints prices to the console
-	print_array(sorted_names, vending_machine.size);
+	print_array(sorted_products, vending_machine.size);
 
-	delete[] sorted_names;
+	delete[] sorted_products;
 
 
 
@@ -412,32 +422,180 @@ void print_products_sorted_alphabetically(Vending_machine vending_machine) { // 
 
 }
 
+void print_products_sorted_by_price(Vending_machine vending_machine) { // Sorts all of the machine's products prices.
+	// Copies prices to an array, and then sorts that array.
+	// This aproach is slower than sorting them directly before copying them to an array, but it's easier to code, understand, and change in the future.
+
+	// The number of maximum unique product names that can exist, is the same as the number of slots (if each slot has an unique product).
+	// While we could first check the number of unique product names before storing them to an array (to avoid allocating more space than we need to), there isn't a need to do so.
+	// The machine doesn't have enough slots to warrant this memory optimization. We will simply delete the allocated array after the function runs.
+	Slot* sorted_slots = new Slot[vending_machine.size]; // Initializes the array.
+
+	for (int i = 0; i < vending_machine.size; i++) {
+
+		// Check if the price isn't already in the array before copying, to avoid duplication.
+		if (is_in_array(vending_machine.slots[i].product, sorted_slots, vending_machine.size) == false) {
+
+			sorted_slots[i] = vending_machine.slots[i];
+
+		}
+
+	}
+
+	
+	for (int j = 1; j < vending_machine.size; j++) {
+
+		float price = sorted_slots[j].price;
+		string product = sorted_slots[j].product;
+
+		int i = j - 1;
+
+		while ((i >= 0) && (sorted_slots[i].price > price)) {
+			sorted_slots[i + 1].product = sorted_slots[i].product;
+			sorted_slots[i + 1].price = sorted_slots[i].price;
+			i = i - 1;
+		}
+
+		sorted_slots[i + 1].price = price;
+		sorted_slots[i + 1].product = product;
+
+	}
+	
+	
+
+	// Prints prices to the console
+	refresh_console(vending_machine);
+
+	cout << left << setw(26) << "  Produto" << "Preço" << endl
+		<< " ------------------------------" << endl;
+	for (int i = 0; i < vending_machine.size; i++) {
+
+		if (sorted_slots[i].product != "Vazio") {
+
+			cout << "| " << setw(24) << sorted_slots[i].product << setw(5) << sorted_slots[i].price << "|" << endl;
+
+		}
+
+	}
+
+	cout << " ------------------------------" << endl;
+
+	delete[] sorted_slots;
+	system("Pause");
+
+
+}
+
+void print_products_sorted_by_quantity(Vending_machine vending_machine) { // Sorts all of the machine's products prices.
+	// Copies prices to an array, and then sorts that array.
+	// This aproach is slower than sorting them directly before copying them to an array, but it's easier to code, understand, and change in the future.
+
+	// The number of maximum unique product names that can exist, is the same as the number of slots (if each slot has an unique product).
+	// While we could first check the number of unique product names before storing them to an array (to avoid allocating more space than we need to), there isn't a need to do so.
+	// The machine doesn't have enough slots to warrant this memory optimization. We will simply delete the allocated array after the function runs.
+	Slot* sorted_slots = new Slot[vending_machine.size]; // Initializes the array.
+
+	// Places products in sorted slots.
+	for (int i = 0; i < vending_machine.size; i++) {
+
+		bool product_already_in_array = false;
+
+		for (int x = 0; x < vending_machine.size; x++) {
+
+			// If the product is already in a slot.
+			if (vending_machine.slots[i].product == sorted_slots[x].product) {
+
+				sorted_slots[x].quantity += vending_machine.slots[i].quantity;
+				product_already_in_array = true;
+
+			}
+
+		}
+
+		// If the price isn't already in a slot before copying.
+		if (product_already_in_array == false) { sorted_slots[i] = vending_machine.slots[i]; }
+	}
+
+	// Sorts Products
+	for (int j = 1; j < vending_machine.size; j++) {
+
+		string product = sorted_slots[j].product;
+		int quantity = sorted_slots[j].quantity;
+
+		int i = j - 1;
+
+		while ((i >= 0) && (sorted_slots[i].quantity > quantity)) {
+			sorted_slots[i + 1].product = sorted_slots[i].product;
+			sorted_slots[i + 1].quantity = sorted_slots[i].quantity;
+			i = i - 1;
+		}
+
+		sorted_slots[i + 1].product = product;
+		sorted_slots[i + 1].quantity = quantity;
+
+	}
+
+	// Prints sorted products
+	refresh_console(vending_machine);
+
+	cout << left << setw(26) << "  Produto" << "Quant." << endl
+		<< " -------------------------------" << endl;
+	for (int i = 0; i < vending_machine.size; i++) {
+
+		if (sorted_slots[i].product != "Vazio") {
+
+			cout << "| " << setw(24) << sorted_slots[i].product << setw(6) << sorted_slots[i].quantity << "|" << endl;
+
+		}
+
+	}
+
+	cout << " -------------------------------" << endl;
+
+	delete[] sorted_slots;
+	system("Pause");
+
+}
+
+
 void print_products_menu(Vending_machine vending_machine) {
 
 	int option = 0;
 
-	cout << "Imprimir produtos: " << endl;
-	cout << "	1 - Por ordem alfabética." << endl;
-	cout << "	2 - Por preço." << endl;
-	cout << "	3 - Por quantidade disponível." << endl;
+	refresh_console(vending_machine);
 
-	// TODO: Sanitize inputs
-	cin >> option;
+	if (vending_machine_is_empty(vending_machine) == false) {
 
-	switch (option) {
-	
-		case 1: 
+		cout << "Imprimir produtos: " << endl;
+		cout << "  1 - Por ordem alfabética." << endl;
+		cout << "  2 - Por preço." << endl;
+		cout << "  3 - Por quantidade disponível." << endl;
+
+		// TODO: Sanitize inputs
+		cin >> option;
+
+		switch (option) {
+
+		case 1:
 			print_products_sorted_alphabetically;
 			break;
 
-			/*
-		case 2: sort_products_by_price;
+		case 2:
+			print_products_sorted_by_price(vending_machine);
+			break;
 
-		case 3: sort_products_by_quantity;
-			*/
-			
-	default:
-		break;
+		case 3:
+			print_products_sorted_by_quantity(vending_machine);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	else {
+		cout << "Não é possível imprimir nenhum produto pois a máquina está vazia." << endl;
+		system("Pause");
 	}
 
 }
@@ -545,7 +703,6 @@ void employee_choices_full(Vending_machine* vending_machine, int slot_position, 
 	}
 }
 
-
 void add_products(Vending_machine* vending_machine, int slot_position, char adding_slot_letter, int adding_quantity, string adding_product) {
 	
 	// If the product quantity to add to the slot overfills that slot.
@@ -601,6 +758,7 @@ void add_products_menu(Vending_machine* vending_machine) {
 				string adding_product = "";
 				cin.ignore();
 				getline(cin, adding_product);
+
 
 				if (adding_product != "Vazio"){ // !Noted: Better implementation
 
@@ -658,6 +816,9 @@ void add_products_menu(Vending_machine* vending_machine) {
 
 }
 
+//! ------------------------ Save and Load ------------------------
+
+
 void save_vending_machine_menu(Vending_machine vending_machine) {
 
 	refresh_console(vending_machine);
@@ -690,6 +851,8 @@ void load_vending_machine(Vending_machine* vending_machine) {
 
 }
 
+//! ------------------------ Main Employee Menu ------------------------
+
 void employee_menu(Vending_machine* vending_machine){
 
 	refresh_console(*vending_machine);
@@ -697,7 +860,7 @@ void employee_menu(Vending_machine* vending_machine){
 	cout << "Menu Funcionário:" << endl
 		<< "  1 - Limpar Máquina" << endl
 		<< "  2 - Limpar Slot" << endl
-		<< "  3 - Repor Produto" << endl
+		<< "  3 - Adicionar/Repor Produto" << endl
 		<< "  4 - Alterar Preço" << endl
 		<< "  5 - Adicionar Slot" << endl
 		<< "  6 - Adicionar Moedas" << endl

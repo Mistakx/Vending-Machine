@@ -8,6 +8,9 @@ using namespace std;
 
 int main() {
 
+    cout << ("B" < "A   ") << ("AC" < "AB");
+    system("PAuse");
+
     locale::global(locale("English")); // All future I/O and string manipulation/conversion (even the ones outside of the main function) will use the english program locale.
     // Messing with the locale has various non wanted effects on string to float conversion.
     srand(time(NULL)); // Initializes the random number generator time(NULL) as the seed.
@@ -65,9 +68,7 @@ int main() {
                 break;
             }
 
-
         }
-
 
         return 0;
     }
@@ -80,7 +81,8 @@ int main() {
 }
 
 // char + number
-
+// Improvement: Putting a space at the end of a product name counts as a different product.
+// Improvement: Cache on printed products
 // TODO: Make so that u can't add a slot with a number as a letter.
 // TODO: check if files are correctly formatted.
 // TODO: CHEck if functions dont return in all cases.

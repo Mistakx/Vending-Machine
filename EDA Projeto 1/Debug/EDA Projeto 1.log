@@ -1,6 +1,3 @@
-﻿  client.cpp
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(144,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(153,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(162,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\client.cpp(171,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+﻿  main.cpp
+C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\main.cpp(16,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   EDA Projeto 1.vcxproj -> C:\Tools\Programming\My Programs\UMa\Vending-Machine\EDA Projeto 1\Debug\EDA Projeto 1.exe

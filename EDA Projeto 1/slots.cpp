@@ -93,3 +93,4 @@ void clean_slot(Slot* slot) {
 	slot->price = 0;
 
 }
+

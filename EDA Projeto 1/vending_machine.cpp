@@ -22,7 +22,7 @@ void initialize_vending_machine(Vending_machine* vending_machine, Products* init
 
 	}
 
-	// Initializes each vending_machine sort.
+	// Initializes each vending_machine slot.
 	vending_machine->slots = new Slot[vending_machine->size]; // The vending machine is an array of slots.
 	for (int i = 0; i < vending_machine->size; i++) {
 

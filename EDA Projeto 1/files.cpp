@@ -5,21 +5,7 @@
 
 using namespace std;
 
-/*
-File reading implementations:
 
-    First way: Keep reading the file anytime we need to acess information.
-     - Advantages: Doesn't use RAM to store the file because the file is kept on disk. 
-     - Disadvantages: It's slower because it needs to open the file that's kept on disk anytime the program needs to acess information. Even SSDs read speed isn't as fast as RAM.
-
-    Second way: Save the file to an array and keep it on RAM.
-     - Advantages: It's faster because of the aforementioned reasons. This allows the file that's on disk to be modified without any problem since it is closed after saving the data to the array,
-     - Disadvantages: Uses RAM since it needs to save the array. If the file size is too big the array will get too big to save on RAM.
-
-    Chosen Implementation: The second. 
-     - RAM usage is highly unlikely to be a problem since 1 million characters use approximately 1 megabyte of RAM.
-// 
-*/
 
 /*
 Since we chose the second implementation, now the program needs to save the file to an array. Once again we have two options.
