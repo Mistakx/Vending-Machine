@@ -13,7 +13,6 @@ bool give_change(Vending_machine* vending_machine, float change) {
 	while ((change >= 200) && (two_euro_change < vending_machine->cash_box[5])) {
 		two_euro_change++;
 		change -= 200;
-		//change = round(change);
 	}
 
 
@@ -21,45 +20,33 @@ bool give_change(Vending_machine* vending_machine, float change) {
 	while ((change >= 100) && (one_euro_change < vending_machine->cash_box[4])) {
 		one_euro_change++;
 		change -= 100;
-		//change = round(change);
-
 	}
 
 	int fifty_cents_change = 0;
 	while ((change >= 50) && (fifty_cents_change < vending_machine->cash_box[3])) {
 		fifty_cents_change++;
 		change -= 50;
-		//change = round(change);
-
 	}
 
 	int twenty_cents_change = 0;
 	while ((change >= 20) && (twenty_cents_change < vending_machine->cash_box[2])) {
 		twenty_cents_change++;
 		change -= 20;
-		//change = round(change);
-
 	}
 
 	int ten_cents_change = 0;
 	while ((change >= 10) && (ten_cents_change < vending_machine->cash_box[1])) {
 		ten_cents_change++;
 		change -= 10;
-		//change = round(change);
-
 	}
 
 	int five_cents_change = 0;
 	while ((change >= 5) && (five_cents_change < vending_machine->cash_box[0])) {
 		five_cents_change++;
 		change -= 5;
-		//change = round(change);
-
 	}
-
-	//change = round(change);	
 	
-
+	
 	// If there was enough change.
 	if (change == 0) {
 		vending_machine->cash_box[5] -= two_euro_change;
@@ -96,7 +83,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 	cout << "Introduza o slot: ";
 	char chosen_slot_letter = 0;
-	// !TODO: Input sanitizing.
+	// TODO: Input sanitizing.
 	cin >> chosen_slot_letter;
 	chosen_slot_letter = toupper(chosen_slot_letter);
 	cout << endl;
@@ -105,14 +92,11 @@ void buy_product_menu(Vending_machine* vending_machine) {
 
 	for (int i = 0; i < vending_machine->size; i++) {
 
-		if (chosen_slot_letter == vending_machine->slots[i].letter) { // Finds the slot that the client chose. 
-		// !Noted: Another search algorithm could be used. But there's not enough slots to justify replacing such a simple algorithm as this one.
+		if (chosen_slot_letter == vending_machine->slots[i].letter) { // !Noted:Binary search could be used
+
 
 			// If the chosen slot is not empty.
 			if (vending_machine->slots[i].quantity > 0) {
-
-				cout << "Escolheu: " << vending_machine->slots[i].product << endl;
-				cout << "Preço: " << vending_machine->slots[i].price << endl << endl;
 
 				float total_entered = 0;
 
@@ -206,11 +190,8 @@ void buy_product_menu(Vending_machine* vending_machine) {
 						vending_machine->cash_box[0] -= five_cent_coins;
 
 						refresh_console(*vending_machine);
-
 						cout << "Valor Introduzido: " << total_entered << endl << endl;
-
 						cout << "Produto não devolvido. Não existe troco suficiente na máquina." << endl;
-
 						system("Pause");
 					}
 				}
@@ -227,7 +208,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 					vending_machine->cash_box[0] -= five_cent_coins;
 
 					refresh_console(*vending_machine);
-
+					cout << "Valor Introduzido: " << total_entered << endl << endl;
 					cout << "Produto não devolvido. Não introduziu dinheiro suficiente." << endl;
 					system("Pause");
 
@@ -236,7 +217,7 @@ void buy_product_menu(Vending_machine* vending_machine) {
 			}
 
 			else {
-				cout << "O slot escolhido (Slot " << chosen_slot_letter << ") está vazio." << endl;
+				cout << "O slot escolhido está vazio." << endl;
 				system("Pause");
 			}
 

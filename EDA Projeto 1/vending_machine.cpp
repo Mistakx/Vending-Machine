@@ -6,38 +6,29 @@
 
 using namespace std;
 
-//! ------------------------ Vending Machine Operations ------------------------
 
-void initialize_vending_machine(Vending_machine* vending_machine, Products* initialization_products, Prices prices) {
+void initialize_vending_machine(Vending_machine* vending_machine, Products* products, Prices* prices) {
 
-	cout << "A inicializar a máquina de vendas..." << endl;
+	cout << "A inicializar a máquina de vendas..." << endl << endl;
 
-	// Initializes the vending_machine size.
+	// Initializes the vending machine size.
 	vending_machine->size = rand() % 4 + 9; // Generates a random number between 9 and 12 (including both)
 
-	// Initializes the vending_machine coins.
+	// Initializes the vending machine cash box.
 	for (int i = 0; i < 6; i++) {
 
 		vending_machine->cash_box[i] = rand() % 11 + 10; // Generates a random number between 10 and 20 (including both)
 
 	}
 
-	// Initializes each vending_machine slot.
-	vending_machine->slots = new Slot[vending_machine->size]; // The vending machine is an array of slots.
+	// Initializes each vending machine slot.
+	vending_machine->slots = new Slot[vending_machine->size];
+
 	for (int i = 0; i < vending_machine->size; i++) {
 
-		initialize_slot(&vending_machine->slots[i], i, initialization_products, prices);
+		initialize_slot(&vending_machine->slots[i], i, products, prices);
 
 	}
-
-	// !Debug: Prints the remaining products that were not used in the initialization.
-	//cout << "Remaining Products: " << endl; // Debug
-	//print_array(initialization_products->array, initialization_products->lenght); // Debug
-	//cout << endl; // Debug
-
-
-
-
 
 }
 
@@ -55,7 +46,6 @@ void print_slots(Vending_machine vending_machine) {
 	
 	cout << endl;
 
-	//! Reference: https://pt.wikipedia.org/wiki/Lista_de_abreviaturas
 	cout << left << setw(12) << "  Slot" << setw(26) << "Produto" << setw(11) << "Preço" << setw(12) << "Quant." << "Capac." << endl;
 
 	cout << " ------------------------------------------------------------------" << endl;
@@ -92,7 +82,6 @@ void refresh_console(Vending_machine vending_machine) {
 }
 
 void check_funds(Vending_machine vending_machine) { 
-	// !Noted: Improvement in case of 1 coin left
 
 	bool low_on_funds = false;
 
@@ -179,11 +168,6 @@ void check_funds(Vending_machine vending_machine) {
 }
 
 void save_vending_machine(Vending_machine vending_machine, string file_path) {
-	// The save file is organized in a way that it is easy to be read by both a human and a computer.
-	// Each slot is separated by a space, and it's values are always saved in the same order.
-	// The order being: Slot Letter, Slot Capacity, Current Number of Products, Product Name, Slot Price.
-	// Each line contains a string explaining what the value that follows it represents. 
-	// While the file ends up being bigger, we believe the added readability is important, and the added file size is negligible.
 
 	ofstream file(file_path);
 
@@ -213,11 +197,7 @@ void save_vending_machine(Vending_machine vending_machine, string file_path) {
 		file.close();
 
 		system(("attrib +r " + file_path).c_str()); // Changes the file to read only. Only works on windows. 
-
 		// TODO: Cross platform this.
-		// The system function argument requires a C style string, C++ strings are different. Therefore c_str() is used.
-		// Reference 1: https://stackoverflow.com/questions/4907805/using-variables-in-system-function-c
-		// Reference 2: https://stackoverflow.com/questions/7416445/what-is-use-of-c-str-function-in-c
 
 		cout << "A máquina foi gravada em \"" << file_path << "\"." << endl;
 		system("pause");
@@ -242,6 +222,7 @@ void load_vending_machine(string file_path, Vending_machine* vending_machine ) {
 		// Reads the first line (where the machine size is located), and loads the machine size to the value read.
 		getline(file, line);
 		vending_machine->size = stoi(line.substr(22));
+		delete[] vending_machine->slots;
 		vending_machine->slots = new Slot[vending_machine->size];
 
 		// Loads the coins.

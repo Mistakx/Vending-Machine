@@ -12,9 +12,9 @@ struct Slot {
 	int capacity = 0; // The maximum capacity of the slot.
 };
 
-void initialize_slot(Slot* slot_to_initialize, int slot_position, Products* initialization_products, Prices text_prices);
+void initialize_slot(Slot* slot_to_initialize, int slot_position, Products* products, Prices* prices);
 
-void print_slot(Slot slot_to_print);
+void print_slot(Slot slot);
 
 void clean_slot(Slot* slot);
 
