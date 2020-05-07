@@ -1,21 +1,36 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <string>
 #include "employee.h"
 #include "client.h"
 
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
 
     locale::global(locale("English")); 
     srand(time(NULL)); 
     
+    string products_file_path = ""; 
+    string prices_file_path = "";
 
-    // Since the machine initialization demands that all initialized slots contain different products, products.txt needs to contain enough files for the initialization to ocurr without an error.
-    string products_file_path = "C:\\Users\\Mistakx\\Desktop\\produtos.txt"; 
-    string prices_file_path = "C:\\Users\\Mistakx\\Desktop\\precos.txt";
+    if (argc > 1) {
+        products_file_path = argv[1];
+        prices_file_path = argv[2];
+    }
 
+    else {
+        cout << endl;
+        cout << "Localização do ficheiro que contém os produtos: ";
+        getline(cin, products_file_path);
+        cout << endl;
+        cout << "Localização do ficheiro que contém os preços: " ;
+        getline(cin, prices_file_path);
+        cout << endl;
+        system("cls");
+
+    }
 
     Products* products = new Products;
     products_text_parsing(products_file_path, products); // Parses the "produtos.txt" file to a struct we can work it, and saves the result to "products".
@@ -70,10 +85,5 @@ int main() {
 
 }
 
-// char + number
-// Improvement: Putting a space at the end of a product name counts as a different product.
-// Improvement: Cache on printed products
-// TODO: CHEck if functions dont return in all cases.
-// TODO: Don't forget to ask for the File location.
-// TODO: Check if cin doesnt need to be getline
-// TODO: Check all random number generations. 
+
+

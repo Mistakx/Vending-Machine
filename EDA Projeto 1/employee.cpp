@@ -660,7 +660,7 @@ bool add_to_fitting_empty_slot(Vending_machine* vending_machine, int adding_quan
 
 }
 
-void employee_choices_not_full(Vending_machine* vending_machine, int slot_position, char adding_slot_letter, int adding_quantity, string adding_product) {
+void employee_choices_not_full(Vending_machine* vending_machine, int slot_position, char adding_slot_letter, int adding_quantity, string adding_product, float price) {
 
 	refresh_console(*vending_machine);
 
@@ -678,12 +678,14 @@ void employee_choices_not_full(Vending_machine* vending_machine, int slot_positi
 		vending_machine->slots[slot_position].quantity += adding_quantity;
 		vending_machine->slots[slot_position].capacity = vending_machine->slots[slot_position].quantity;
 		vending_machine->slots[slot_position].product = adding_product;
+		vending_machine->slots[slot_position].price = price;
 		break;
 
 
 	case 2:
 		vending_machine->slots[slot_position].quantity = vending_machine->slots[slot_position].capacity;
 		vending_machine->slots[slot_position].product = adding_product;
+		vending_machine->slots[slot_position].price = price;
 		break;
 
 	case 0:
@@ -695,7 +697,7 @@ void employee_choices_not_full(Vending_machine* vending_machine, int slot_positi
 	}
 }
 
-void employee_choices_full(Vending_machine* vending_machine, int slot_position, char adding_slot_letter, int adding_quantity, string adding_product) {
+void employee_choices_full(Vending_machine* vending_machine, int slot_position, char adding_slot_letter, int adding_quantity, string adding_product, float price) {
 
 	refresh_console(*vending_machine);
 
@@ -712,6 +714,7 @@ void employee_choices_full(Vending_machine* vending_machine, int slot_position, 
 		vending_machine->slots[slot_position].quantity += adding_quantity;
 		vending_machine->slots[slot_position].capacity = vending_machine->slots[slot_position].quantity;
 		vending_machine->slots[slot_position].product = adding_product;
+		vending_machine->slots[slot_position].price = price;
 		break;
 
 	case 0:
@@ -750,12 +753,12 @@ void add_products_to_empty_slot(Vending_machine* vending_machine, int slot_posit
 
 			// If the chosen slot is full
 			if (vending_machine->slots[slot_position].quantity == vending_machine->slots[slot_position].capacity) {
-				employee_choices_full(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product);
+				employee_choices_full(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product, price);
 			}
 
 			// If the chosen slot isn't full
 			else {
-				employee_choices_not_full(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product);
+				employee_choices_not_full(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product, price);
 			}
 
 		}
@@ -784,12 +787,12 @@ void add_products_to_non_empty_slot(Vending_machine* vending_machine, int slot_p
 
 			// If the chosen slot is full
 			if (vending_machine->slots[slot_position].quantity == vending_machine->slots[slot_position].capacity) {
-				employee_choices_full(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product);
+				employee_choices_full(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product, vending_machine->slots[slot_position].price);
 			}
 
 			// If the chosen slot isn't full
 			else {
-				employee_choices_not_full(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product);
+				employee_choices_not_full(vending_machine, slot_position, adding_slot_letter, adding_quantity, adding_product, vending_machine->slots[slot_position].price);
 			}
 
 		}

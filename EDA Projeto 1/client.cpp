@@ -211,7 +211,6 @@ void buy_product_menu(Vending_machine* vending_machine) {
 					cout << "Valor Introduzido: " << total_entered << endl << endl;
 					cout << "Produto não devolvido. Não introduziu dinheiro suficiente." << endl;
 					system("Pause");
-
 				}
 
 			}

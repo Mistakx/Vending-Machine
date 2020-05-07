@@ -37,11 +37,6 @@ void prices_text_parsing(string file_path, Prices* prices) {
         cout << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe, ou está a ser usado por outro processo." << endl << endl; 
     }
 
-
-
-
-    
-
 }
 
 void products_text_parsing(string file_path , Products* products) {
@@ -71,7 +66,7 @@ void products_text_parsing(string file_path , Products* products) {
     }
 
     else {
-        cout << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe, ou está a ser usado por outro processo." << endl << endl;
+        cout << endl << "Ocorreu um erro ao tentar abrir \"" << file_path << "\"." << endl << "O ficheiro não existe, ou está a ser usado por outro processo." << endl << endl;
     }
 
 
