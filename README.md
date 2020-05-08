@@ -1,4 +1,4 @@
 # Vending-Machine
 EDA Project Part 1
 
-Thanks for the contributions everyone. Se é para fazer sózinho então o próximo projeto só vai ter o meu nome no repositório.
+As an assignment for university, I had to develop a vending machine software from scratch, in one month. The source code is written in English, but the results printed to the console are in Portuguese, per the requests of the teacher.
