@@ -5,4 +5,4 @@ As an assignment for university, I had to develop a program that simulates a ven
 
 Project graded in 19.38 / 20.
 
-![Project](./vendingMachine.png)
+![Project](./assets/vendingMachine.png)
